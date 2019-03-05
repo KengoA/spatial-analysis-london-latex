@@ -1,8 +1,5 @@
 \documentclass{article}
-
-
 \usepackage{arxiv}
-
 \usepackage[utf8]{inputenc} % allow utf-8 input
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
 \usepackage{hyperref}       % hyperlinks
@@ -93,7 +90,7 @@ where $\overline{r}$ is the rent in the CBD and $\underline{d}$ is the lower bou
 \begin{center}
 $p _ { H } ( d ) = \overline { r } - \tau d$
 \end{center}
-This will be the basis of the univariate regression models where I estimate the coefficient $\tau$ associated with two measures of distance between the CBD and a given area; spherical distance and commuting time cost approximated by Uber Movement Data. $\overline{r}$ is the constant term which represents the rent in the CBD at distance $d = 0$.
+This will be the basis of the univariate regression models where I estimate the coefficient $\tau$ associated with two measures of distance between the CBD and a given area; orthodromic distance and commuting time cost approximated by Uber Movement Data. $\overline{r}$ is the constant term which represents the rent in the CBD at distance $d = 0$.
 
 \subsection{Heterogenous Amenities and Hedonic Pricing Model}
 In the simple monocentric model, it was assumed that the city is a featureless plane without any urban amenities such as restaurants and cafes. This assumption is now relaxed by introducing heterogeneity in amenities where each subsection of the city has its own characteristics that residents have a specific values to. This is an extension to the hedonic pricing model by Rosen (1974) where a product is valued by its internal characteristics and external factors that are both homogenous and objective. In Rosen's model, the class of products offers a package of quantifiable characteristics represented by a vector 
@@ -147,21 +144,20 @@ openstreetmap
 
 \section{Variable Construction}
 \subsection{Distance Measures}
-\subsubsection{Spherical Distance}
-The first measure of distance is the distance between two points on a sphere; the centroid of a given area $C_k$ and the centroid of the CBD, $C_0$, which is then converted to miles for ease of interpretation. 
-Each MSOA is represented by a simple polygon where each vertex consists of latitude and longitude in the standard geographic coordinate system (Bolstad, 2016). Let $v_{i,j}$ be a vertex in a N-gon where $v_i$ is a longitude and $v_j$ is a latitude. Then the centroid for a given a $k$ is expressed as 
+The following illustrates how two measures of distance are constructed. To ensure an approximately normal distribution, both distance measures are log-transformed in the regression models.
+\subsubsection{Orthodromic Distance}
+The first measure of distance is the distance between two points on a sphere; the centroid of a given area $C_k$ and the centroid of the CBD, $C_0$, which is then converted to miles for ease of interpretation. Each MSOA is represented by a simple polygon where each vertex consists of longitude and latitude in the standard geographic coordinate system (Bolstad, 2016). Let $v_{i,j}$ be a vertex in a N-gon where $v_i$ is a longitude and $v_j$ is a latitude. Then the centroid for a given a $k$ is expressed as 
 
 \begin{center}
     $C_k = (C_{ki}, C_{kj})  = (\frac{1}{n} \Sigma_{i=1}^{N} v_i, \frac{1}{n} \Sigma_{j=1}^{N} v_j) $
 \end{center}
 
-where $C_{ki}$ and $C_{kj}$ are latitude and longitude for the centroid, respectively. Since the centroids are relatively close to each other with each located in Greater London, the Haversine formula (Van Brummelen, 2013) is used for numerical stability to calculate the spherical distance between two points, $C_0$ and $C_k$, such that
+where $C_{ki}$ and $C_{kj}$ are longitude and latitude for the centroid, respectively. Since the centroids are relatively close to each other with each located in our setting, the Haversine formula (Van Brummelen, 2013) is used for numerical stability to calculate the distance between two points on a sphere\footnote{The Haversine formula is computationally better conditioned than the arc length formula when two points are close to each other due to rounding errors}, $C_0$ and $C_k$, such that
 
 \begin{center}
     $d =2 r \arcsin \left(\sqrt{\sin ^{2}\left(\frac{C_{0i}-C_{ki}}{2}\right)+\cos \left(C_{ki}\right) \cos \left(C_{0i}\right) \sin ^{2}\left(\frac{C_{0j}-C_{kj}}{2}\right)}\right)$
 \end{center}
-where $r$ is the radius of earth in a desired unit of length, which in this case miles with $r = 3956$.
-
+where $r$ is the radius of earth in a desired unit of length, which in this case miles with $r = 3956$. 
 
 \subsubsection{Uber Movement Distance}
 \subsection{Geographical Features from OpenStreetMap}
