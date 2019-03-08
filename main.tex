@@ -11,6 +11,8 @@
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{natbib}
+\usepackage{float}
 
 \title{A Spatial Analysis of Housing Prices and Neighbourhood Characteristics in London}
 
@@ -56,7 +58,7 @@ establish causality from supermarkets and
 \section{Literature Review and Conceptual Framework}
 \subsection{Current Research on Housing Prices}
 \subsection{Monocentric City Model}
-This paper employs a geographic economic theory by Alonso (1964), Mills (1967) and Muth (1967) called bid-rent theory, which refers to the relationship between the distance from the the city centre and real estate price. The basic intuition is that the housing price increases as you move closer towards the Central Business District (CBD), and consumers face a trade-off between housing costs and commuting costs. A simple version of this model described below underpins the empirical specifications throughout this paper and requires the following five assumptions, the first of which will be relaxed in the next section.
+This paper employs a geographic economic theory pioneered by Alonso (1964) called bid-rent theory, which refers to the relationship between the distance from the the city centre and real estate price. The basic intuition is that the housing price increases as you move closer towards the Central Business District (CBD), and consumers face a trade-off between housing costs and commuting costs. A simple version of this model described below underpins the empirical specifications throughout this paper and requires the following five assumptions, the first of which will be relaxed in the next section.
 \begin{itemize}
 \setlength\itemsep{0.1em}
 \item Residents are homogenous and live in a featureless urban area where all the jobs are located in the CBD
@@ -93,24 +95,26 @@ $p _ { H } ( d ) = \overline { r } - \tau d$
 This will be the basis of the univariate regression models where I estimate the coefficient $\tau$ associated with two measures of distance between the CBD and a given area; orthodromic distance and commuting time cost approximated by Uber Movement Data. $\overline{r}$ is the constant term which represents the rent in the CBD at distance $d = 0$.
 
 \subsection{Heterogenous Amenities and Hedonic Pricing Model}
-In the simple monocentric model, it was assumed that the city is a featureless plane without any urban amenities such as restaurants and cafes. This assumption is now relaxed by introducing heterogeneity in amenities where each subsection of the city has its own characteristics that residents have a specific values to. This is an extension to the hedonic pricing model by Rosen (1974) where a product is valued by its internal characteristics and external factors that are both homogenous and objective. In Rosen's model, the class of products offers a package of quantifiable characteristics represented by a vector 
+In the simple monocentric model, it was assumed that the city is a featureless plane without any urban amenities such as restaurants and cafes. This assumption is now relaxed by introducing heterogeneity in amenities where each subsection of the city has its own characteristics that residents assign specific values to. This is an extension of the hedonic pricing model by Rosen (1974) where a product is valued by its internal characteristics and external factors that are both homogenous and objective. In Rosen's model, the class of products offers a package of quantifiable characteristics represented by a vector 
 
 \begin{center}
     $z = \left( z _ { 1 } , z _ { 2 } , \dots , z _ { n } \right)$
 \end{center}
-where $z_i$ is the $i$-th characteristic on a plane of features, which in our case corresponds to the amount of a certain amenity that is present in the neighbourhood. Importantly, market clearing prices $p(z)$ are determined by consumer tastes and production costs, which equalise across buyers and identify the demand structure.
+
+where $z_i$ is the $i$-th characteristic on a plane of features, which in our case corresponds to the amount of a certain amenity that is present in the neighbourhood. Importantly, market clearing prices $p(z)$ are determined by consumer tastes and production costs, which equalise across buyers and identify the demand structure:
 
 \begin{center}
     $p ( z ) = p \left( z _ { 1 } , z _ { 2 } , \dots , z _ { n } \right)$
 \end{center}
-The existence of market equilibrium in pure competition and decomposition of products into attributes $z_i$ functions as the theoretical grounding of the multivariate regression of this paper, where the first element is the distance from the CBD and $2, 3, ..., n$-th elements are features based on geographical distributions of urban amenities.
 
-This paper confines its scope to sections of London boroughs defined as Middle Layer Super Output Area (MSOA) where each typically contains a population of 5000 to 7500 (The Greater London Authority, 2014). While the hedonic pricing model is often applied for a smaller unit of housing such as a house or a flat, Rosen's criterion for objectivity which states tha is better suited for neighbourhood characteristics as some factors in a individual housing unit such as architectural styles and view from the window could entail heterogeneous preferences that are prone to subjectivity.
+The existence of market equilibrium in pure competition and decomposition of products into attributes $z_i$ is the theoretical grounding of the multivariate regressions of this paper, where the first element is the distance from the CBD and $2, 3, ..., n$-th elements are features based on geographical distributions of urban amenities.
+
+This paper confines its scope to sections of London boroughs defined as Middle Layer Super Output Area (MSOA) which was created to provide a statistical overview of the population, with an average of 8346 in 2010 (The Greater London Authority, 2014). While the hedonic pricing model is often applied for a smaller unit of housing such as a house or a flat, Rosen's criterion for objectivity is better suited for neighbourhood characteristics as some factors in a individual housing unit such as architectural styles and view from the window could entail heterogeneous preferences that are prone to subjectivity.
 
 
 \section{Data}
 \subsection{Housing Prices}
-\begin{figure}[h]
+\begin{figure}[H]
   \begin{subfigure}{.45\textwidth}
       \centering
       \includegraphics[width=.95\linewidth]{images/housing_raw_mean.png}
@@ -123,7 +127,7 @@ This paper confines its scope to sections of London boroughs defined as Middle L
       \caption{log(Mean Housing Price)}
       \label{fig:1(b)}
   \end{subfigure}
-  \caption{Housing price distribution across Greater London}
+  \caption{Housing Price Distribution Across Greater London}
   \label{fig:price_distribution}
 \end{figure}
 
@@ -140,19 +144,26 @@ openstreetmap
 \subsection{Private School Data}
 \texttt{geocoders.Nominatim} module from \texttt{geopy} library in Python is used to convert addresses into longitudes and latitudes.
 
-
-
 \section{Variable Construction}
+\subsection{Defining the City Centre}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\linewidth]{images/cbd.png}
+  \caption{Distribution of CBD functions in London (Greater London Authority, 2008)}
+  \label{fig:cbd}
+\end{figure}
+
+
 \subsection{Distance Measures}
 The following illustrates how two measures of distance are constructed. To ensure an approximately normal distribution, both distance measures are log-transformed in the regression models.
 \subsubsection{Orthodromic Distance}
-The first measure of distance is the distance between two points on a sphere; the centroid of a given area $C_k$ and the centroid of the CBD, $C_0$, which is then converted to miles for ease of interpretation. Each MSOA is represented by a simple polygon where each vertex consists of longitude and latitude in the standard geographic coordinate system (Bolstad, 2016). Let $v_{i,j}$ be a vertex in a N-gon where $v_i$ is a longitude and $v_j$ is a latitude. Then the centroid for a given a $k$ is expressed as 
+The first measure of distance is the distance between two points on a sphere; the centroid of a given area $C_k$ and the centroid of the CBD, $C_0$, which is then converted to miles for ease of interpretation. Each MSOA is represented by a simple polygon where each vertex consists of longitude and latitude in the standard geographic coordinate system (Bolstad, 2016). Let $v_{i,j}$ be a vertex in a N-gon where $v_i$ is a longitude and $v_j$ is a latitude. Then the centroid for a given $k$ is expressed as 
 
 \begin{center}
     $C_k = (C_{ki}, C_{kj})  = (\frac{1}{n} \Sigma_{i=1}^{N} v_i, \frac{1}{n} \Sigma_{j=1}^{N} v_j) $
 \end{center}
 
-where $C_{ki}$ and $C_{kj}$ are longitude and latitude for the centroid, respectively. Since the centroids are relatively close to each other with each located in our setting, the Haversine formula (Van Brummelen, 2013) is used for numerical stability to calculate the distance between two points on a sphere\footnote{The Haversine formula is computationally better conditioned than the arc length formula when two points are close to each other due to rounding errors}, $C_0$ and $C_k$, such that
+where $C_{ki}$ and $C_{kj}$ are longitude and latitude for the centroid, respectively. Since the centroids are relatively close to each other with each located in our setting, the Haversine formula (Van Brummelen, 2013) is used for numerical stability to calculate the distance $d$ between two points on a sphere\footnote{The Haversine formula is computationally better conditioned than the arc length formula when two points are close to each other on the sphere due to rounding errors}, $C_0$ and $C_k$, such that
 
 \begin{center}
     $d =2 r \arcsin \left(\sqrt{\sin ^{2}\left(\frac{C_{0i}-C_{ki}}{2}\right)+\cos \left(C_{ki}\right) \cos \left(C_{0i}\right) \sin ^{2}\left(\frac{C_{0j}-C_{kj}}{2}\right)}\right)$
@@ -160,107 +171,226 @@ where $C_{ki}$ and $C_{kj}$ are longitude and latitude for the centroid, respect
 where $r$ is the radius of earth in a desired unit of length, which in this case miles with $r = 3956$. 
 
 \subsubsection{Uber Movement Distance}
+
+\subsubsection{Data Distribution}
+
+\begin{figure}[H]
+  \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{images/scatter_miles.png}
+      \caption{log(Miles distance)}
+      \label{fig:1(a)}
+  \end{subfigure}
+  \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{images/scatter_uber.png}
+      \caption{log(Uber Distance in Average Minutes Travelled)}
+      \label{fig:1(b)}
+  \end{subfigure}
+  \caption{Log-log Linearity Between Housing Price and Distance}
+  \label{fig:log_log}
+\end{figure}
+
 \subsection{Geographical Features from OpenStreetMap}
 
 \section{Empirical Analysis}
 \subsection{Model Specifications}
 \subsection{Results}
-\subsection{Robustness Checks}
+\subsubsection{Monocentric City Model}
+% monocentric city model
+\begin{table}[H] \centering 
+  \caption{Commuting Cost Comparison} 
+  \label{} 
+\small 
+\begin{tabular}{@{\extracolsep{-10pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{log\_price} \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ dist\_miles\_log & $-$0.584$^{***}$ &  \\ 
+  & (0.021) &  \\ 
+  & & \\ 
+ uber\_dist\_mean\_log &  & $-$0.651$^{***}$ \\ 
+  &  & (0.025) \\ 
+  & & \\ 
+ Constant & 14.299$^{***}$ & 18.216$^{***}$ \\ 
+  & (0.038) & (0.194) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & 726 & 726 \\ 
+R$^{2}$ & 0.525 & 0.475 \\ 
+Adjusted R$^{2}$ & 0.525 & 0.474 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+
+\subsubsection{Hedonic Pricing Model}
+% hedonic pricing model
+\begin{table}[H] \centering 
+  \caption{Regression Results at MSOA Level} 
+  \label{} 
+\small 
+\begin{tabular}{@{\extracolsep{-5pt}}lcccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-7} 
+\\[-1.8ex] & \multicolumn{6}{c}{log\_price} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
+\hline \\[-1.8ex] 
+ dist\_miles\_log & $-$0.558$^{***}$ & $-$0.535$^{***}$ & $-$0.523$^{***}$ & $-$0.512$^{***}$ & $-$0.510$^{***}$ & $-$0.483$^{***}$ \\ 
+  & (0.008) & (0.008) & (0.008) & (0.008) & (0.008) & (0.008) \\ 
+  & & & & & & \\ 
+ supermarket\_high &  & 0.141$^{***}$ & 0.122$^{***}$ & 0.105$^{***}$ & 0.098$^{***}$ & 0.080$^{***}$ \\ 
+  &  & (0.013) & (0.013) & (0.013) & (0.013) & (0.013) \\ 
+  & & & & & & \\ 
+ supermarket\_low &  & $-$0.134$^{***}$ & $-$0.113$^{***}$ & $-$0.100$^{***}$ & $-$0.099$^{***}$ & $-$0.094$^{***}$ \\ 
+  &  & (0.017) & (0.016) & (0.016) & (0.016) & (0.016) \\ 
+  & & & & & & \\ 
+ residential &  &  & 0.010$^{***}$ & 0.012$^{***}$ & 0.010$^{***}$ & 0.010$^{***}$ \\ 
+  &  &  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
+  & & & & & & \\ 
+ retail &  &  & $-$0.0004 & 0.00003 & $-$0.0002 & $-$0.0001 \\ 
+  &  &  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
+  & & & & & & \\ 
+ industrial &  &  & $-$0.032$^{***}$ & $-$0.027$^{***}$ & $-$0.028$^{***}$ & $-$0.026$^{***}$ \\ 
+  &  &  & (0.003) & (0.003) & (0.003) & (0.003) \\ 
+  & & & & & & \\ 
+ construction &  &  & 0.009$^{***}$ & 0.001 & 0.002 & 0.0004 \\ 
+  &  &  & (0.003) & (0.004) & (0.004) & (0.004) \\ 
+  & & & & & & \\ 
+ commercial &  &  & 0.009$^{***}$ & $-$0.006$^{*}$ & $-$0.004 & $-$0.005 \\ 
+  &  &  & (0.003) & (0.004) & (0.004) & (0.003) \\ 
+  & & & & & & \\ 
+%  garden &  &  & 0.001 & 0.0005 & 0.0004 & 0.001 \\ 
+%   &  &  & (0.0005) & (0.0004) & (0.0004) & (0.0004) \\ 
+%   & & & & & & \\ 
+%  pitch &  &  & 0.010$^{***}$ & 0.009$^{***}$ & 0.008$^{***}$ & 0.007$^{***}$ \\ 
+%   &  &  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
+%   & & & & & & \\ 
+%  park &  &  & $-$0.004$^{***}$ & $-$0.004$^{***}$ & $-$0.005$^{***}$ & $-$0.004$^{***}$ \\ 
+%   &  &  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
+%   & & & & & & \\ 
+%  playground &  &  & $-$0.018$^{***}$ & $-$0.017$^{***}$ & $-$0.020$^{***}$ & $-$0.010$^{***}$ \\ 
+%   &  &  & (0.004) & (0.004) & (0.004) & (0.004) \\ 
+%   & & & & & & \\ 
+%  nature\_reserve &  &  & 0.006 & 0.014 & 0.009 & 0.032$^{**}$ \\ 
+%   &  &  & (0.016) & (0.016) & (0.016) & (0.015) \\ 
+%   & & & & & & \\ 
+ golf\_course &  &  & 0.224$^{***}$ & 0.211$^{***}$ & 0.202$^{***}$ & 0.168$^{***}$ \\ 
+  &  &  & (0.020) & (0.020) & (0.020) & (0.019) \\ 
+  & & & & & & \\ 
+%  hotel &  &  &  & $-$0.004$^{*}$ & $-$0.003 & $-$0.003 \\ 
+%   &  &  &  & (0.002) & (0.002) & (0.002) \\ 
+%   & & & & & & \\ 
+%  attraction &  &  &  & 0.020$^{***}$ & 0.019$^{***}$ & 0.021$^{***}$ \\ 
+%   &  &  &  & (0.006) & (0.006) & (0.006) \\ 
+%   & & & & & & \\ 
+%  museum &  &  &  & 0.031$^{**}$ & 0.031$^{**}$ & 0.018 \\ 
+%   &  &  &  & (0.015) & (0.015) & (0.014) \\ 
+%   & & & & & & \\ 
+%  art &  &  &  & 0.024 & 0.028$^{*}$ & $-$0.009 \\ 
+%   &  &  &  & (0.016) & (0.016) & (0.016) \\ 
+%   & & & & & & \\ 
+ restaurant &  &  &  & 0.006$^{***}$ & 0.006$^{***}$ & 0.007$^{***}$ \\ 
+  &  &  &  & (0.002) & (0.002) & (0.002) \\ 
+  & & & & & & \\ 
+ pub &  &  &  & 0.004 & 0.001 & 0.001 \\ 
+  &  &  &  & (0.003) & (0.003) & (0.003) \\ 
+  & & & & & & \\ 
+ cafe &  &  &  & 0.004 & 0.005 & 0.004 \\ 
+  &  &  &  & (0.004) & (0.004) & (0.004) \\ 
+  & & & & & & \\ 
+ fast\_food &  &  &  & $-$0.018$^{***}$ & $-$0.019$^{***}$ & $-$0.018$^{***}$ \\ 
+  &  &  &  & (0.003) & (0.003) & (0.003) \\ 
+  & & & & & & \\ 
+ school &  &  &  &  & 0.022$^{***}$ &  \\ 
+  &  &  &  &  & (0.003) &  \\ 
+  & & & & & & \\ 
+ private\_school &  &  &  &  &  & 0.125$^{***}$ \\ 
+  &  &  &  &  &  & (0.007) \\ 
+  & & & & & & \\ 
+ university &  &  &  &  & 0.004 & 0.002 \\ 
+  &  &  &  &  & (0.004) & (0.004) \\ 
+  & & & & & & \\
+ controls: \\ nature \& tourist amenities &  &  &  &  &  &  \\ 
+  &  &  &  &  &  &  \\ 
+  & & & & & & \\
+ Constant & 14.270$^{***}$ & 14.210$^{***}$ & 14.140$^{***}$ & 14.110$^{***}$ & 14.080$^{***}$ & 14.030$^{***}$ \\ 
+  & (0.018) & (0.019) & (0.019) & (0.020) & (0.020) & (0.020) \\ 
+  & & & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 4,755 & 4,755 & 4,755 & 4,755 & 4,755 & 4,755 \\ 
+R$^{2}$ & 0.512 & 0.529 & 0.592 & 0.602 & 0.606 & 0.625 \\ 
+Adjusted R$^{2}$ & 0.512 & 0.528 & 0.591 & 0.600 & 0.604 & 0.623 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{6}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+\subsection{Causal Analysis of Supermarket Amenities}
+retail area median (more than 5 multipolygons) \\
+random oversampling \\
+    => imbalanced dataset (correlation difficult to establish) \\
+    
+supermarket high (corr -0.4) \\
+supermarket low (corr 0.7) \\
+
+exclusion condition \\ 
+    => corr resid -0.08 \\
+
+\begin{table}[H] \centering 
+  \caption{Instrumental Variables} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{log\_price} \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ dist\_miles\_log & $-$0.635$^{***}$ & $-$0.618$^{***}$ \\ 
+  & (0.027) & (0.028) \\ 
+  & & \\ 
+ supermarket\_high & 0.202$^{***}$ &  \\ 
+  & (0.048) &  \\ 
+  & & \\ 
+ supermarket\_low &  & $-$0.042 \\ 
+  &  & (0.035) \\ 
+  & & \\ 
+ Constant & 14.457$^{***}$ & 14.590$^{***}$ \\ 
+  & (0.107) & (0.049) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Weak instruments & 0 & 0 \\ 
+Wu-Hausman & 0.0006 & 0.4475 \\ 
+Observations & 336 & 300 \\ 
+R$^{2}$ & 0.771 & 0.835 \\ 
+Adjusted R$^{2}$ & 0.770 & 0.834 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
 
 \section{Discussion}
-\subsection{Causal Interpretations}
 \subsection{External Validity}
 \subsection{Limitations and Future Work}
 
 \section{Conclusion}
 
-
-% \section{Examples of citations, figures, tables, references}
-% \label{sec:others}
-% \lipsum[8] \cite{kour2014real,kour2014fast} and see \cite{hadash2018estimate}.
-
-% The documentation for \verb+natbib+ may be found at
-% \begin{center}
-%   \url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-% \end{center}
-% Of note is the command \verb+\citet+, which produces citations
-% appropriate for use in inline text.  For example,
-% \begin{verbatim}
-%   \citet{hasselmo} investigated\dots
-% \end{verbatim}
-% produces
-% \begin{quote}
-%   Hasselmo, et al.\ (1995) investigated\dots
-% \end{quote}
-
-% \begin{center}
-%   \url{https://www.ctan.org/pkg/booktabs}
-% \end{center}
-
-
-% \subsection{Figures}
-% \lipsum[10] 
-% See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-% \lipsum[11] 
-
-% \begin{figure}
-%   \centering
-%   \fbox{\rule[-.5cm]{4cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
-%   \caption{Sample figure caption.}
-%   \label{fig:fig1}
-% \end{figure}
-
-% \subsection{Tables}
-% \lipsum[12]
-% See awesome Table~\ref{tab:table}.
-
-% \begin{table}
-%  \caption{Sample table title}
-%   \centering
-%   \begin{tabular}{lll}
-%     \toprule
-%     \multicolumn{2}{c}{Part}                   \\
-%     \cmidrule(r){1-2}
-%     Name     & Description     & Size ($\mu$m) \\
-%     \midrule
-%     Dendrite & Input terminal  & $\sim$100     \\
-%     Axon     & Output terminal & $\sim$10      \\
-%     Soma     & Cell body       & up to $10^6$  \\
-%     \bottomrule
-%   \end{tabular}
-%   \label{tab:table}
-% \end{table}
-
 \newpage
-\bibliographystyle{unsrt}  
-\bibliography{references}  %%% Remove comment to use the external .bib file (using bibtex).
-%%% and comment out the ``thebibliography'' section.
-
-
-% %%% Comment out this section when you \bibliography{references} is enabled.
-
-
-% \begin{thebibliography}{1}
-
-% \bibitem{kour2014real}
-% George Kour and Raid Saabne.
-% \newblock Real-time segmentation of on-line handwritten arabic script.
-% \newblock In {\em Frontiers in Handwriting Recognition (ICFHR), 2014 14th
-%   International Conference on}, pages 417--422. IEEE, 2014.
-
-% \bibitem{kour2014fast}
-% George Kour and Raid Saabne.
-% \newblock Fast classification of handwritten on-line arabic characters.
-% \newblock In {\em Soft Computing and Pattern Recognition (SoCPaR), 2014 6th
-%   International Conference of}, pages 312--318. IEEE, 2014.
-
-% \bibitem{hadash2018estimate}
-% Guy Hadash, Einat Kermany, Boaz Carmeli, Ofer Lavi, George Kour, and Alon
-%   Jacovi.
-% \newblock Estimate and replace: A novel approach to integrating deep neural
-%   networks with existing applications.
-% \newblock {\em arXiv preprint arXiv:1804.09028}, 2018.
-
-% \end{thebibliography}
+\nocite{*}
+\bibliographystyle{agsm}  
+\bibliography{references.bib}
 
 \end{document}
