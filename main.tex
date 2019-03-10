@@ -11,8 +11,9 @@
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{subcaption}
-\usepackage{natbib}
+\usepackage[numbers]{natbib}
 \usepackage{float}
+\usepackage[nottoc]{tocbibind}
 
 \title{A Spatial Analysis of Housing Prices and Neighbourhood Characteristics in London}
 
@@ -42,7 +43,7 @@
 
 \newpage
 \section{Introduction}
- In every metropolitan area, housing price has a strong influence over individual consumption choices and hence important implications in social mobility and quality of life. In light of the rapid urbanisation with 68\% of the world population expected to live in urban areas by 2050 (United Nations, 2018), the underlying mechanism of urban housing markets has been under heavy scrutiny in the fields of urban research and economic geography, while being a focal point of major media outlets in the United Kingdom (The Guardian, 2019; The Independent, 2019).
+ In every metropolitan area, housing price has a strong influence over individual consumption choices and hence important implications in social mobility and quality of life. In light of the rapid urbanisation with 68\% of the world population expected to live in urban areas by 2050 (United Nations, 2018), the underlying mechanism of urban housing markets has been under heavy scrutiny in the fields of urban research and economic geography, while being a focal point of major media outlets in the United Kingdom (The Guardian, 2019).
  
  This paper's empirical analysis builds on the bid-rent theory by Alonso (1964) and integrates the hedonic pricing model by Rosen (1974), where I estimate the coefficients associated with commuting cost to the Central Business District (CBD) and those of urban amenities such as private schools and supermarkets. 
  
@@ -457,7 +458,12 @@ Residual Std. Error (df = 926) & 0.258 & 0.472 \\
 
 \newpage
 \nocite{*}
+\renewcommand\harvardyearleft{\unskip, }
+\renewcommand\harvardyearright[1]{.}
+\let\oldthebibliography\thebibliography
+\renewcommand\thebibliography{\let\bf\relax\oldthebibliography}
+\renewcommand{\refname}{\textbf{Bibliography}}
 \bibliographystyle{agsm}  
-\bibliography{references.bib}
+\bibliography{bibliography.bib}
 
 \end{document}
