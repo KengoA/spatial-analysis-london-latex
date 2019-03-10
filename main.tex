@@ -29,7 +29,7 @@
 \maketitle
 
 \begin{abstract}
-\lipsum[1]
+Integrating the bid rent theory by Alonso (1964) into the hedonic pricing model by Rosen (1974), I analyse the dynamics of housing prices in Greater London by constructing spatial features from Uber Movement and OpenStreetMap. Estimating the commuting cost to the city centre, I find that the average travelling time on the road in the morning has a larger effect on housing prices than the orthodromic distance, while the latter has a higher explanatory power overall. I then introduce heterogeneity in local amenities by accounting for factors such as supermarkets, land use, food establishments and educational institutions, and find that the presence of high-end supermarkets, private schools, and golf courses are strongly associated with high housing prices, whereas industrial land use, fast food restaurants, and low-end supermarkets show negative correlations. Using planning permissions and mean retail floor spaces as instruments, I provide causal evidence that different classes of supermarkets have opposing effects on housing prices.
 \end{abstract}
 
 % keywords can be removed
@@ -62,7 +62,7 @@ establish causality from supermarkets and
 This paper employs a geographic economic theory pioneered by Alonso (1964) called bid-rent theory, which refers to the relationship between the distance from the the city centre and real estate price. The basic intuition is that the housing price increases as you move closer towards the Central Business District (CBD), and consumers face a trade-off between housing costs and commuting costs. A simple version of this model described below underpins the empirical specifications throughout this paper and requires the following five assumptions, the first of which will be relaxed in the next section.
 \begin{itemize}
 \setlength\itemsep{0.1em}
-\item Residents are homogenous and live in a featureless urban area where all the jobs are located in the CBD
+\item Residents are homogeneous and live in a featureless urban area where all the jobs are located in the CBD
 \item Each resident is a worker and commutes to a job in the CBD
 \item Each worker receives an urban wage $w$ with inelastic labour supply
 \item Commuting from distance $d$ entails a linear commuting cost $t(d) = \tau d$
@@ -95,8 +95,8 @@ $p _ { H } ( d ) = \overline { r } - \tau d$
 \end{center}
 This will be the basis of the univariate regression models where I estimate the coefficient $\tau$ associated with two measures of distance between the CBD and a given area; orthodromic distance and commuting time cost approximated by Uber Movement Data. $\overline{r}$ is the constant term which represents the rent in the CBD at distance $d = 0$.
 
-\subsection{Heterogenous Amenities and Hedonic Pricing Model}
-In the simple monocentric model, it was assumed that the city is a featureless plane without any urban amenities such as restaurants and cafes. This assumption is now relaxed by introducing heterogeneity in amenities where each subsection of the city has its own characteristics that residents assign specific values to. This is an extension of the hedonic pricing model by Rosen (1974) where a product is valued by its internal characteristics and external factors that are both homogenous and objective. In Rosen's model, the class of products offers a package of quantifiable characteristics represented by a vector 
+\subsection{heterogeneous Amenities and Hedonic Pricing Model}
+In the simple monocentric model, it was assumed that the city is a featureless plane without any urban amenities such as restaurants and cafes. This assumption is now relaxed by introducing heterogeneity in amenities where each subsection of the city has its own characteristics that residents assign specific values to. This is an extension of the hedonic pricing model by Rosen (1974) where a product is valued by its internal characteristics and external factors that are both homogeneous and objective. In Rosen's model, the class of products offers a package of quantifiable characteristics represented by a vector 
 
 \begin{center}
     $z = \left( z _ { 1 } , z _ { 2 } , \dots , z _ { n } \right)$
@@ -165,7 +165,7 @@ The first measure of distance is the distance between two points on a sphere; th
     $C_k = (C_{ki}, C_{kj})  = (\frac{1}{n} \Sigma_{i=1}^{N} v_i, \frac{1}{n} \Sigma_{j=1}^{N} v_j) $
 \end{center}
 
-where $C_{ki}$ and $C_{kj}$ are longitude and latitude for the centroid, respectively. Since the centroids are relatively close to each other with each located in our setting, the Haversine formula (Van Brummelen, 2013) is used for numerical stability to calculate the distance $d$ between two points on a sphere\footnote{The Haversine formula is computationally better conditioned than the arc length formula when two points are close to each other on the sphere due to rounding errors}, $C_0$ and $C_k$, such that
+where $C_{ki}$ and $C_{kj}$ are longitude and latitude for the centroid, respectively. Since the centroids are relatively close to each other with each located in our setting, the Haversine formula (Van Brummelen, 2017) is used for numerical stability to calculate the distance $d$ between two points on a sphere\footnote{The Haversine formula is computationally better conditioned than the arc length formula when two points are close to each other on the sphere due to rounding errors}, $C_0$ and $C_k$, such that
 
 \begin{center}
     $d =2 r \arcsin \left(\sqrt{\sin ^{2}\left(\frac{C_{0i}-C_{ki}}{2}\right)+\cos \left(C_{ki}\right) \cos \left(C_{0i}\right) \sin ^{2}\left(\frac{C_{0j}-C_{kj}}{2}\right)}\right)$
