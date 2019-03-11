@@ -30,7 +30,8 @@
 \maketitle
 
 \begin{abstract}
-Integrating the bid rent theory by Alonso (1964) into the hedonic pricing model by Rosen (1974), I analyse the dynamics of housing prices in Greater London by constructing spatial features from Uber Movement and OpenStreetMap. Estimating the commuting cost to the city centre, I find that the average travelling time on the road in the morning has a larger effect on housing prices than the orthodromic distance, while the latter has a higher explanatory power overall. I then introduce heterogeneity in local amenities by accounting for factors such as supermarkets, land use, food establishments and educational institutions, and find that the presence of high-end supermarkets, private schools, and golf courses are strongly associated with high housing prices, whereas industrial land use, fast food restaurants, and low-end supermarkets show negative correlations. Using planning permissions and mean retail floor spaces as instruments, I provide causal evidence that different classes of supermarkets have opposing effects on housing prices, which was popularised by a research paper that coined the term "Waitrose effect" (Lloyds Bank, 2016). 
+Integrating the bid rent theory by Alonso (1964) into the hedonic pricing model by Rosen (1974), I analyse the dynamics of housing prices in Greater London by constructing spatial features from Uber Movement and OpenStreetMap. Estimating the commuting cost to the city centre, I find that the average travelling time on the road in the morning has a larger effect on housing prices than the orthodromic distance, while the latter has a higher explanatory power overall. I then introduce heterogeneity in local amenities by accounting for factors such as supermarkets, land use, food establishments and educational institutions, and find that the presence of high-end supermarkets, private schools, and golf courses are strongly associated with high housing prices, whereas industrial land use, fast food restaurants, and low-end supermarkets show negative correlations. Using planning permissions and mean retail floor spaces as instruments, I provide causal evidence that different classes of supermarkets have opposing effects on housing prices.
+
 \end{abstract}
 
 % keywords can be removed
@@ -43,23 +44,19 @@ Integrating the bid rent theory by Alonso (1964) into the hedonic pricing model 
 \tableofcontents
 
 \newpage
-\section{Introduction}
-In every metropolitan area, housing price has a strong influence over individual consumption choices and hence important implications in social mobility and quality of life. In light of the rapid urbanisation with 68\% of the world population expected to live in urban areas by 2050 (United Nations, 2018), the underlying mechanism of urban housing markets has been under heavy scrutiny in the fields of urban research and economic geography, as well as being a focal point of major media outlets in the United Kingdom (The Guardian, 2019). One example of dynamically changing urban landscapes is the penetration of German supermarkets into the British grocery market in recent years (Davey, 2018), whose low-price policies likely affect local consumption behaviours. 
+\section{Introduction} \label{section:intro}
+In every metropolitan area, housing price has a strong influence over individual consumption choices and hence important implications in social mobility and quality of life. In light of the rapid urbanisation with 68\% of the world population expected to live in urban areas by 2050 (United Nations, 2018), the underlying mechanism of urban housing markets has been under heavy scrutiny in the fields of urban research and economic geography, as well as being a focal point of major media outlets in the United Kingdom (The Guardian, 2019). One example of dynamically changing urban landscapes is the penetration of German supermarkets into the British grocery market in recent years (Davey, 2018), with their low-price policies likely affecting local consumption behaviours. Several newspaper articles popularised the term 'the Waitrose effect' based on a research paper by Lloyds Bank (2016), which states that proximity to a supermarket implies house price premium upwards of 43,000 pound sterling (The Telegraph, 2016; The Independent, 2017). The causal effects of the presence of supermarkets and the importance of other features affecting the housing prices, nonetheless, remain to be understood.
  
-This objective of this paper is to investigate the effects of such urban amenities and neighbourhood characteristics on the housing prices at the local level, with the empirical models inspired by the bid rent theory by Alonso (1964) for the commuting cost to the city centre and the hedonic pricing model by Rosen (1974) for product differentiation with objective characteristics.
+This objective of this paper is to investigate the effects of such urban amenities and neighbourhood characteristics on the housing prices at the local level, with the empirical models inspired by the bid rent theory by Alonso (1964) for the commuting cost to the city centre and the hedonic pricing model by Rosen (1974) for product differentiation with objective characteristics. In doing so, I provide novelty in two respects. The first is construction of local amenity variables from OpenStreetMap, an open-sourced collaborative mapping project, which is applicable beyond the scope of the Greater London Area that my empirical analysis is concerned with. The second is the causal analysis of supermarket amenities in relation to housing prices with instrumental variables, in which I demonstrate that the presence of high-end supermarkets such as Waitrose and Marks and Spencer cause higher housing prices, controlling for other local amenities and distance to the Central Business District (CBD).
 
-I provide novelty in two respects. The first is construction of local amenity variables from OpenStreetMap, an open-sourced collaborative mapping project, which is applicable beyond the scope of the Greater London Area that my empirical analysis of their effects on housing prices is subject to. 
-
-The second is the causal analysis of supermarket amenities in relation to hosing prices with instrumental variables, in contrast to the popular research by Lloyds Bank which coined the term 'Waitrose Effect'.
-
-This paper is structured as follows.
+This paper is structured as follows. Section \ref{section:intro}
 
 
 
 \section{Literature Review and Conceptual Framework}
 \subsection{Current Research on Housing Prices}
-\subsection{Monocentric City Model}
-This paper employs a geographic economic theory pioneered by Alonso (1964) called bid-rent theory, which refers to the relationship between the distance from the the city centre and real estate price. The basic intuition is that the housing price increases as you move closer towards the Central Business District (CBD), and consumers face a trade-off between housing costs and commuting costs. A simple version of this model described below underpins the empirical specifications throughout this paper and requires the following five assumptions, the first of which will be relaxed in the next section.
+\subsection{Bid Rent Theory}
+This paper employs a geographic economic theory pioneered by Alonso (1964) called bid-rent theory, which refers to the relationship between the distance from the the city centre and real estate price. The basic intuition is that the housing price increases as you move closer towards the CBD, and consumers face a trade-off between housing costs and commuting costs. A simple version of this model described below underpins the empirical specifications throughout this paper and requires the following five assumptions, the first of which will be relaxed in the next section.
 \begin{itemize}
 \setlength\itemsep{0.1em}
 \item Residents are homogeneous and live in a featureless urban area where all the jobs are located in the CBD
