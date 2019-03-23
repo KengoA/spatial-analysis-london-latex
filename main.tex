@@ -15,8 +15,9 @@
 \usepackage{float}
 \usepackage[nottoc]{tocbibind}
 
+% font size changed from default 10pt to 11pt
 
-\title{A Spatial Analysis of Housing Prices and Neighbourhood Characteristics in London}
+\title{A Spatial Analysis of Housing Prices and Supermarket Amenities in London}
 
 \author{
   \large{Kengo Arao}\thanks{With heartfelt thanks to Dr David Candon for dedicated supervision and to Dr Andrei Potlogea for guidance in urban economics}      \thanks{Data and code for this paper are publicly available at \href{https://github.com/KengoA/spatial-analysis-london}{https://github.com/KengoA/spatial-analysis-london}} \\
@@ -30,7 +31,7 @@
 \maketitle
 
 \begin{abstract}
-Integrating the bid rent theory by Alonso (1964) into the hedonic pricing model by Rosen (1974), I analyse the dynamics of housing prices in Greater London by constructing spatial features from Uber Movement and OpenStreetMap. Estimating the commuting cost to the city centre, I find that the average travelling time on the road in the morning has a larger effect on housing prices than the orthodromic distance, while the latter has a higher explanatory power overall. I then introduce heterogeneity in local amenities by accounting for factors such as supermarkets, land use, food establishments and educational institutions, and find that the presence of high-end supermarkets, private schools, and golf courses are strongly associated with high housing prices, whereas industrial land use, fast food restaurants, and low-end supermarkets show negative correlations. Using planning permissions and mean retail floor spaces as instruments, I provide causal evidence that different classes of supermarkets have opposing effects on housing prices.
+Integrating the bid rent theory by Alonso (1964), Muth (1969), and Mills (1972) into the hedonic pricing model by Rosen (1974), I analyse the dynamics of housing prices in Greater London by constructing spatial features from Uber Movement and OpenStreetMap. Estimating the commuting cost to the city centre, I find that the average travelling time on the road in the morning has a larger effect on housing prices than the orthodromic distance, while the latter has a higher explanatory power overall. I then introduce heterogeneity in local amenities by accounting for factors such as supermarkets, land use, food establishments and educational institutions, and find that the presence of high-end supermarkets, private schools, and golf courses are strongly associated with high housing prices, whereas industrial land use, fast food restaurants, and low-end supermarkets show negative correlations. Using planning permissions and mean retail floor spaces as instruments, I provide causal evidence that different classes of supermarkets have opposing effects on housing prices.
 
 \end{abstract}
 
@@ -45,18 +46,18 @@ Integrating the bid rent theory by Alonso (1964) into the hedonic pricing model 
 
 \newpage
 \section{Introduction} \label{section:intro}
-In every metropolitan area, housing price has a strong influence over individual consumption choices and hence important implications in social mobility and quality of life. In light of the rapid urbanisation with 68\% of the world population expected to live in urban areas by 2050 (United Nations, 2018), the underlying mechanism of urban housing markets has been under heavy scrutiny in the fields of urban research and economic geography, as well as being a focal point of major media outlets in the United Kingdom (The Guardian, 2019). One example of dynamically changing urban landscapes is the penetration of German supermarkets into the British grocery market in recent years (Davey, 2018), with their low-price policies likely affecting local consumption behaviours. Several newspaper articles popularised the term 'the Waitrose effect' based on a research paper by Lloyds Bank (2016), which states that proximity to a supermarket implies house price premium upwards of 43,000 pound sterling (The Telegraph, 2016; The Independent, 2017). The causal effects of the presence of supermarkets and the importance of other features affecting the housing prices, nonetheless, remain to be understood.
+In every metropolitan area, housing price has a strong influence over individual consumption choices and hence important implications in social mobility and quality of life. In light of the rapid urbanisation with 68\% of the world population expected to live in urban areas by 2050 (United Nations, 2018), the underlying mechanism of urban housing markets has been under heavy scrutiny in the fields of urban research and economic geography, as well as being a focal point of major media outlets in the United Kingdom (The Guardian, 2019). One example of dynamically changing urban landscapes is the penetration of German supermarkets into the British grocery market in recent years (Davey, 2018), with their low-price policies affecting local consumption behaviours. Several newspaper articles popularised the term 'the Waitrose effect' based on a research paper by Lloyds Bank (2016), which states that proximity to a supermarket implies house price premium upwards of 43,000 pound sterling (The Telegraph, 2016; The Independent, 2017). The causal effects of the presence of supermarkets and the importance of other features affecting the housing prices, nonetheless, remain to be understood.
  
 This objective of this paper is to investigate the effects of such urban amenities and neighbourhood characteristics on the housing prices at the local level, with the empirical models inspired by the bid rent theory by Alonso (1964) for the commuting cost to the city centre and the hedonic pricing model by Rosen (1974) for product differentiation with objective characteristics. In doing so, I provide novelty in two respects. The first is construction of local amenity variables from OpenStreetMap, an open-sourced collaborative mapping project, which is applicable beyond the scope of the Greater London Area that my empirical analysis is concerned with. The second is the causal analysis of supermarket amenities in relation to housing prices with instrumental variables, in which I demonstrate that the presence of high-end supermarkets such as Waitrose and Marks and Spencer cause higher housing prices, controlling for other local amenities and distance to the Central Business District (CBD).
 
-This paper is structured as follows. Section \ref{section:intro}
+This paper is structured as follows. Section \ref{section:lit} discusses existing applied research in the context of housing prices and local amenities, and provide theoretical foundations of seminal models by Alonso (1964) and Rosen (1974). Section \ref{section:data} briefly describes data sources and their properties, followed by Section \ref{section:variables} where I illustrate data transformation and feature engineering methods. Section \ref{section:model} describes regression models and the results in accordance with the theoretical framework, and provide causal analysis with instrumental variables for high-end and low-end supermarkets. Section \ref{section:discussion} discusses limitations and external validity of this study, and Section \ref{section:conclusion} concludes.
 
 
+\section{Conceptual Frameworks and Literature Review} \label{section:lit}
+This section introduces two theories that are fundamental to the empirical models I develop in Section \ref{section:model}, and gives an overview of applied research in urban economics to reinforce the scopes of variable construction in Section \ref{section:variables}.
 
-\section{Literature Review and Conceptual Framework}
-\subsection{Current Research on Housing Prices}
 \subsection{Bid Rent Theory}
-This paper employs a geographic economic theory pioneered by Alonso (1964) called bid-rent theory, which refers to the relationship between the distance from the the city centre and real estate price. The basic intuition is that the housing price increases as you move closer towards the CBD, and consumers face a trade-off between housing costs and commuting costs. A simple version of this model described below underpins the empirical specifications throughout this paper and requires the following five assumptions, the first of which will be relaxed in the next section.
+A starting point for understanding urban complexity is a geographic economic theory by Alonso (1964), Muth (1969), and Mills (1972) called bid-rent theory, which refers to the relationship between the distance from the the city centre and real estate price. The basic intuition is that the housing price increases as you move closer towards the CBD, and consumers face a trade-off between housing costs and commuting costs. A simple version of this model described below, the monocentric city model, underpins the empirical specifications throughout this paper and requires the following five assumptions, the first of which will be relaxed in the next section.
 \begin{itemize}
 \setlength\itemsep{0.1em}
 \item Residents are homogeneous and live in a featureless urban area where all the jobs are located in the CBD
@@ -92,7 +93,7 @@ $p _ { H } ( d ) = \overline { r } - \tau d$
 \end{center}
 This will be the basis of the univariate regression models where I estimate the coefficient $\tau$ associated with two measures of distance between the CBD and a given area; orthodromic distance and commuting time cost approximated by Uber Movement Data. $\overline{r}$ is the constant term which represents the rent in the CBD at distance $d = 0$.
 
-\subsection{heterogeneous Amenities and Hedonic Pricing Model}
+\subsection{Heterogeneous Amenities and Hedonic Pricing Model}
 In the simple monocentric model, it was assumed that the city is a featureless plane without any urban amenities such as restaurants and cafes. This assumption is now relaxed by introducing heterogeneity in amenities where each subsection of the city has its own characteristics that residents assign specific values to. This is an extension of the hedonic pricing model by Rosen (1974) where a product is valued by its internal characteristics and external factors that are both homogeneous and objective. In Rosen's model, the class of products offers a package of quantifiable characteristics represented by a vector 
 
 \begin{center}
@@ -109,9 +110,54 @@ The existence of market equilibrium in pure competition and decomposition of pro
 
 This paper confines its scope to sections of London boroughs defined as Middle Layer Super Output Area (MSOA) which was created to provide a statistical overview of the population, with an average of 8346 in 2010 (The Greater London Authority, 2014). While the hedonic pricing model is often applied for a smaller unit of housing such as a house or a flat, Rosen's criterion for objectivity is better suited for neighbourhood characteristics as some factors in a individual housing unit such as architectural styles and view from the window could entail heterogeneous preferences that are prone to subjectivity.
 
+\subsection{Current Research on Housing Prices}
+Existing research in urban spatial 
 
-\section{Data}
+
+Bid rent theory remains heavily influential in empirical investigations into urban housing prices, 
+
+However, McMillen (2001) highlights the rise of the polycentric city in, 
+
+Nonetheless, location accessibility to the central business district remains a
+
+
+Arribas-Bel and Sanz-Gracia (2014) analyse the time trend of high employment density in 359 U.S. metropolitan areas in 1990, 2000, and 2010, and find that employment centres are still largely concentrated centrally with   
+
+
+Fujita and Ogawa (1982) endogenous models of employment locations
+exogenous monocentricity
+
+Decentralisation of 
+
+There are 
+
+
+education accessibility
+medical accessibility
+consumption accessibility
+
+Niu and Liu (2017) provides several proxies to measure accessibility to key economic activities in modelling urban housing price in Beijing,  
+
+\section{Data} \label{section:data}
+\subsection{Geographic Boundaries}
+The geographic unit for this paper's analysis is based on output areas (OAs) which have been the basis for UK Census since 2001, and are designed to be homogeneous in terms of population sizes and household characteristics (Office for National Statistics, 2019). For compatibility with the housing prices data, an aggregate measure of Middle Layer Super Output Areas (MSOA) is obtained from London Datastore (201 for the empirical analyses throughout the paper with the population ranging from 5000 to 15000 and number of households from 2000 to 6000, where, in the case of Greater London, there are 984 MSOAs and the average population of 8346 in 2010 (Greater London Authority, 2014).
+
 \subsection{Housing Prices}
+Urban rent in each neighbourhood is approximated by property sales registered with Land Registry (2019) which records property sales at the individual dwelling level. This is aggregated for each MSOA at the end of the calendar year for mean and median prices. Table 1 shows descriptive statistics for mean housing prices for each MSOA for the year of 2017, which clearly shows that the prices are not normally distributed with the mean value almost approaching the 75\% percentile, as this is skewed by significantly high housing prices in the central London. Figure 1 maps the geographical distribution of mean housing prices visually both on raw and the log scale.
+
+
+\begin{table}[H]
+\caption{Descriptive Statistics for Mean Housing Prices (GBP)} 
+  \label{} 
+\begin{tabular}{lrrrrrrrr}
+\toprule
+{} &  count &       mean &        std &       min &       25\% &       50\% &       75\% &        max \\
+\midrule
+Value &  983.0 &  603715.49 &  387541.06 &  226536.0 &  391267.0 &  495010.0 &  673064.5 &  4416659.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \begin{figure}[H]
   \centering
   \begin{subfigure}{.45\textwidth}
@@ -131,11 +177,7 @@ This paper confines its scope to sections of London boroughs defined as Middle L
 \end{figure}
 
 \subsection{Distance}
-london msoa
-multipolygons
-
-uber movement data 
-pairwise hours 789
+Each MSOA is defined as a polygon with edges represented with geographic coordinates, which will be the basis for the geometric distance measure between each MSOA and the CBD in Section \ref{section:variables}. The second distance measure is morning commuting time on the road, which is approximated from Uber Movement data (2019) that provides anonymised travel data in the form of summary statistics such as mean travel times and standard deviation at a given hour of the day. This data covers major cities in North America, Europe, Australia and India where Uber usage is high, and quarterly data is available for London since 2016.
 
 \subsection{Geographical Features}
 openstreetmap
@@ -143,7 +185,7 @@ openstreetmap
 \subsection{Private School Data}
 \texttt{geocoders.Nominatim} module from \texttt{geopy} library in Python is used to convert addresses into longitudes and latitudes.
 
-\section{Variable Construction}
+\section{Variable Construction} \label{section:variables}
 \subsection{Defining the City Centre}
 \begin{figure}[H]
   \centering
@@ -194,7 +236,7 @@ where $r$ is the radius of earth in a desired unit of length, which in this case
 
 \subsection{Geographical Features from OpenStreetMap}
 
-\section{Empirical Analysis}
+\section{Empirical Analysis} \label{section:model}
 \subsection{Model Specifications}
 \subsection{Results}
 \subsubsection{Monocentric City Model}
@@ -448,12 +490,12 @@ Residual Std. Error (df = 926) & 0.258 & 0.472 \\
 \end{table} 
     
     
-\section{Discussion}
+\section{Discussion} \label{section:discussion}
 
 \subsection{External Validity}
 \subsection{Limitations and Future Work}
 
-\section{Conclusion}
+\section{Conclusion} \label{section:conclusion}
 
 \newpage
 \nocite{*}
