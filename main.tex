@@ -47,7 +47,7 @@ Integrating the bid rent theory by Alonso (1964), Muth (1969), and Mills (1972) 
 
 \newpage
 \section{Introduction} \label{section:intro}
-In every metropolitan area, housing price has a strong influence over individual consumption choices and hence important implications in social mobility and quality of life. In light of the rapid urbanisation with 68\% of the world population expected to live in urban areas by 2050 (United Nations, 2018), the underlying mechanism of urban housing markets has been under heavy scrutiny in the fields of urban research and economic geography, as well as being a focal point of major media outlets in the United Kingdom (The Guardian, 2019). One example of dynamically changing urban landscapes is the penetration of German supermarkets into the British grocery market in recent years (Davey, 2018), with their low-price policies affecting local consumption behaviours. Several newspaper articles popularised the term 'the Waitrose effect' based on a research paper by Lloyds Bank (2016), which states that proximity to a supermarket implies house price premium upwards of 43,000 pound sterling (The Telegraph, 2016; The Independent, 2017). The causal effects of the presence of supermarkets and the importance of other features affecting the housing prices, nonetheless, remain to be understood.
+In every metropolitan area, housing price has a strong influence over individual consumption choices and hence important implications in social mobility and quality of life. In light of the rapid urbanisation with 68\% of the world population expected to live in urban areas by 2050 (United Nations, 2018), the underlying mechanism of urban housing markets has been under heavy scrutiny in the fields of urban research and economic geography, as well as being a focal point of major media outlets in the United Kingdom (The Guardian, 2019). One example of dynamically changing urban landscapes is the penetration of German supermarkets into the British grocery market in recent years (Davey, 2018), with their low-price policies affecting local consumption behaviours. Several newspaper articles popularised the term 'the Waitrose effect' based on a report by Lloyds Bank (2016), which states that proximity to a supermarket implies house price premium upwards of 43,000 pound sterling (The Telegraph, 2016; The Independent, 2017). The causal effects of the presence of supermarkets and the importance of other features affecting the housing prices, nonetheless, remain to be understood.
  
 This objective of this paper is to investigate the effects of such urban amenities and neighbourhood characteristics on the housing prices at the local level, with the empirical models inspired by the bid rent theory by Alonso (1964) for the commuting cost to the city centre and the hedonic pricing model by Rosen (1974) for product differentiation with objective characteristics. In doing so, I provide novelty in two respects. The first is construction of local amenity variables from OpenStreetMap, an open-sourced collaborative mapping project, which is applicable beyond the scope of the Greater London Area that my empirical analysis is concerned with. The second is the causal analysis of supermarket amenities in relation to housing prices with instrumental variables, in which I demonstrate that the presence of high-end supermarkets such as Waitrose and Marks and Spencer cause higher housing prices, controlling for other local amenities and distance to the Central Business District (CBD).
 
@@ -55,10 +55,10 @@ This paper is structured as follows. Section \ref{section:lit} first provides th
 
 
 \section{Conceptual Frameworks and Literature Review} \label{section:lit}
-This section introduces two theories that are fundamental to the empirical models I develop in Section \ref{section:model}. I then review a body of empirical research regarding the monocentricity assumption by Alonso (1964), as well as several heterogeneous urban amenities to reinforce the scopes of variable construction in Section \ref{section:variables}.
+This section introduces two theories that are fundamental to the empirical models I develop in Section \ref{section:model}. Each theory is accompanied by a review of empirical research and their implications to this study. [need more words]
 
 \subsection{Bid Rent Theory}
-A starting point for understanding urban complexity is a geographic economic theory by Alonso (1964), Muth (1969), and Mills (1972) called bid-rent theory, which refers to the relationship between the distance from the the city centre and real estate price. The basic intuition is that the housing price increases as you move closer towards the CBD, and consumers face a trade-off between housing costs and commuting costs. A simple version of this model described below, the monocentric city model, underpins the empirical specifications throughout this paper and requires the following five assumptions, the first of which will be relaxed in the next section.
+A starting point for understanding urban complexity is a geographic economic theory by Alonso (1964), Muth (1969), and Mills (1972) called bid-rent theory, which refers to the relationship between the distance from the the city centre and real estate price. The basic intuition is that the housing price increases as you move closer towards the CBD, and consumers face a trade-off between housing costs and commuting costs. A simple version of this model described below, the monocentric city model, underpins the empirical specifications throughout this paper and requires the following five assumptions, the first of which will be relaxed in Section \ref{subsection:hedonic}.
 \begin{itemize}
 \setlength\itemsep{0.1em}
 \item Residents are homogeneous and live in a featureless urban area where all the jobs are located in the CBD
@@ -94,7 +94,13 @@ $p _ { H } ( d ) = \overline { r } - \tau d$
 \end{center}
 This will be the basis of the univariate regression models where I estimate the coefficient $\tau$ associated with two measures of distance between the CBD and a given area; orthodromic distance and commuting time cost approximated by Uber Movement Data (Uber Movement, 2019). $\overline{r}$ is the constant term which represents the rent in the CBD at distance $d = 0$.
 
-\subsection{Heterogeneous Amenities and Hedonic Pricing Model}
+\subsection{Plausibility of Monocentricity Assumption} \label{subsection:monocentricity}
+Bid rent theory remains heavily influential in empirical investigations in urban economics, and location has been a dominant explanatory factor for housing prices and urban structures. However, the assumption of monocentric cities has been actively contested both in theoretical and empirical terms. Fujita and Ogawa (1982) criticise the exogenous location of the CBD, and provide general equilibrium models where employment centres are endogenously determined by firms and agents.
+From an empirical point of view, McMillen (2001) highlights the rise of polycentric city structures in the United States, and identifies employment subcenters in Milwaukee, where employment opportunities are scattered around across the metropolitan area with only 6.7\% of them located in the CBD. A more systematic study is conducted by Arribas-Bel and Sanz-Gracia (2014). They analyse the time trend of high employment density in 359 U.S. metropolitan areas in 1990, 2000, and 2010, and find that employment centres are still largely concentrated centrally, with 57\% of all metropolitan areas exhibiting monocentric structures in 2010. It is noteworthy that there is a large variance in employment share figures in these studies, depending on the definition and scope of the CBD. In general, while there is an increasing number of empirical studies that showcase the polycentric urban structures, the assumption of single-core centres appears to hold across modern metropolitan areas. 
+
+In the context of London, European Commission (1999) describes London as a monocentric city given the strong transport connectivity to the periphery areas and concentration of economic activities in the city. On the other hand, there is limited yet meaningful evidence of the polycentric nature of London. Utilising the large scale data of Oyster card transactions in the London subway, Roth et al. (2011) investigate the individual intraurban flows with the Tube network to identify several basins of attraction in London, the largest of which is West End followed by the City of London area. Importantly, they also demonstrate the significance of the Docklands area where a number of financial firms are located. Similarly, Park (2011) studies commuting flows based on labour market statistics, and identifies a cluster of employment in Westminster, Camden and the City areas. Despite the evidence of heterogeneity especially within the central London, the monocentric structure seems to be present in the scale of Greater London. Hence, this paper follows Park (2011) and impose Alonso's (1964) assumption of monocentricity in examining London's urban structure. Identification of the CBD is further explored in Section \ref{subsection:CBD}.
+
+\subsection{Hedonic Pricing Model and Heterogeneous Amenities} \label{subsection:hedonic} 
 In the simple monocentric model, it was assumed that the city is a featureless plane without any urban amenities such as restaurants and cafes. This assumption is now relaxed by introducing heterogeneity in amenities where each subsection of the city has its own characteristics that residents assign specific values to. This is an extension of the hedonic pricing model by Rosen (1974) where a product is valued by its internal characteristics and external factors that are both homogeneous and objective. In Rosen's model, the class of products offers a package of quantifiable characteristics represented by a vector 
 
 \begin{center}
@@ -111,15 +117,20 @@ The existence of market equilibrium in pure competition and decomposition of pro
 
 While the hedonic pricing model is often applied for a smaller unit of housing such as a house or a flat, Rosen's criterion for objectivity is better suited for neighbourhood characteristics which this paper primarily investigates as some factors in a individual housing unit such as architectural styles and view from the window could entail heterogeneous preferences that are prone to subjectivity.
 
-\subsection{Monocentricity Assumption and Current Research on Housing Prices} \label{subsection:review}
-Bid rent theory remains heavily influential in empirical investigations in urban economics, and location has been a dominant explanatory factor for housing prices and urban structures. However, the assumption of monocentric cities has been actively contested both in theoretical and empirical terms. Fujita and Ogawa (1982) criticise the exogenous location of the CBD, and provide general equilibrium models where employment centres are endogenously determined by firms and agents.
-From an empirical point of view, McMillen (2001) highlights the rise of polycentric city structures in the United States, and identifies employment subcenters in Milwaukee, where employment opportunities are scattered around across the metropolitan area with only 6.7\% of them located in the CBD. A more systematic study is conducted by Arribas-Bel and Sanz-Gracia (2014). They analyse the time trend of high employment density in 359 U.S. metropolitan areas in 1990, 2000, and 2010, and find that employment centres are still largely concentrated centrally, with 57\% of all metropolitan areas exhibiting monocentric structures in 2010. It is noteworthy that there is a large variance in employment share figures in these studies, depending on the definition and scope of the CBD. In general, while there is an increasing number of empirical studies that showcase the polycentric urban structures, the assumption of single-core centres appears to hold across modern metropolitan areas. 
+\subsection{Literature on Housing, Local Amenities, and Supermarkets} \label{subsection:lit:supermarkets}
 
-In the context of London, European Commission (1999) describes London as a monocentric city given the strong transport connectivity to the periphery areas and concentration of economic activities in the city. On the other hand, there is limited yet meaningful evidence of the polycentric nature of London. Utilising the large scale data of Oyster card transactions in the London subway, Roth et al. (2011) investigate the individual intraurban flows with the Tube network to identify several basins of attraction in London, the largest of which is West End followed by the City of London area. Importantly, they also demonstrate the significance of the Docklands area where a number of financial firms are located. Similarly, Park (2011) studies commuting flows based on labour market statistics, and identifies a cluster of employment in Westminster, Camden and the City areas. Despite the evidence of heterogeneity especially within the central London, the monocentric structure seems to be present in the scale of Greater London. Hence, this paper follows Park (2011) and impose Alonso's (1964) assumption of monocentricity in examining London's urban structure. Identification of the CBD is further explored in Section \ref{subsection:CBD}.
+Regarding urban amenities, Niu and Liu (2017) provide several proxies to measure accessibility to key economic activities in modelling urban housing price in Beijing. In addition to the employment centre, they investigate the effects of education, consumption and medical accessibility, and calculate the household demand structure for housing prices. They demonstrate that the employment accessibility has by far the highest importance as an economic activity, followed by education, consumption, and medical services. While their results are limited in statistical significance and the scope, their findings motivate the construction of measures of consumption accessibility through the number of supermarkets, and education accessibility in the form of private schools in Section \ref{subsection:school}. In relation to education, Department for Education (2017) finds that home prices in England have a price premium near the schools in the top 10 percent in terms of standardised test performance, where house prices are higher by 8.0\% for primary schools and 6.4\% for secondary schools, holding everything constant.
 
-Regarding urban amenities, Niu and Liu (2017) provide several proxies to measure accessibility to key economic activities in modelling urban housing price in Beijing. In addition to the employment centre, they investigate the effects of education, consumption and medical accessibility, and calculate the household demand structure for housing prices. They demonstrate that the employment accessibility has by far the highest importance as an economic activity, followed education and consumption and medical services. While their results are limited in statistical significance and the scope, their findings motivate the construction of measures of consumption accessibility through the number of supermarkets, and education accessibility in the form of private schools in Section \ref{subsection:school}. In relation to education, Department for Education (2017) finds that home prices in England have a price premium near the schools in the top 10 percent in terms of standardised test performance, where house prices are higher by 8.0\% for primary schools and 6.4\% for secondary schools, holding everything constant.
+Another important aspect of daily consumption accessibility that affects individuals universally across socioeconomic strata is supermarkets. Although peer-reviewed research into the effects of supermarket on housing prices is quite limited and virtually nonexistent in the British context, there is a small literature on Walmart openings in the United States. With their low price policy and "big box" establishments, the largest grocery retailer in the U.S. has been attributed to both positive and negative economic effects. 
+Despite the net positive effect on job creation, Basker and Noel (2009) highlight the downward pressure on local inflation as local businesses and competitors are forced to lower their prices by 1 to 1.2\%. Furthermore, Dube et al. (2007) find that a new Walmart store reduces local retail revenue levels by 0.5 o 0.9\% at the county level.
 
-An important aspect of daily consumption accessibility that affects individuals universally across socioeconomic strata is supermarkets. Despite the lack of rigorous academic research specifically into supermarket amenities, Lloyds Bank's (2016) research into the housing premium of different supermarket chains at the post code level was influential in the British media which led to the popularisation of the term "the Waitrose effect" (The Independent, 2017). Supermarkets in general are associated with positive housing price premium in varying degrees, with Waitrose and Sainsbury's having a strong premium of £38,666 and £27,939 on average, followed by Marks and Spencer (£27,1812), Tesco (£22,072), Iceland(£20,034), Coop (£17,904), and Morrisons (£10,558). The lower end of distribution includes discount supermarkets such as Asda, Lidl, and Aldi which have marginal levels of premium at £5,026, £3,926 and £1,333, respectively. This translates into a premium of 10\% for Waitrose and Sainsbury's, while those of Asda, Lidl and Aldi are limited to 1-2\%. However, their method to calculate these figures is deeply problematic, in that they compare the average housing prices between a postcode area where a target supermarket and an area in the same town where it is not. This approach disregards heterogeneity in amenities in different areas and creates a downward bias to areas without any of the target supermarkets, which makes it difficult to isolate the effects of supermarket amenities especially in densely populated areas such as London. I will investigate the effects of supermarket amenities in a more rigorous manner by controlling for other key measures of accessibility to economic activities within the framework of Alonso (1964) and Rosen (1974). Given the complexity of urban amenities, I compile and synthesise several datasets from different sources for empirical analyses of the monocentric city model and hedonic pricing model.  In doing so, Section \ref{section:data} first describes the data sources and their properties, followed by Section \ref{section:variables} where I carefully construct variables from these datasets.
+Pope and Pope (2015)
+
+Barrett (2016)
+
+
+
+In the United Kingdom, Lloyds Bank's (2016) report into the housing premium of different supermarket chains at the post code level was influential in the British media which led to the popularisation of the term "the Waitrose effect" (The Independent, 2017). Supermarkets in general are associated with positive housing price premium in varying degrees, with Waitrose and Sainsbury's having a strong premium of £38,666 and £27,939 on average, followed by Marks and Spencer (£27,1812), Tesco (£22,072), Iceland(£20,034), Coop (£17,904), and Morrisons (£10,558). The lower end of distribution includes discount supermarkets such as Asda, Lidl, and Aldi which have marginal levels of premium at £5,026, £3,926 and £1,333, respectively. This translates into a premium of 10\% for Waitrose and Sainsbury's, while those of Asda, Lidl and Aldi are limited to 1-2\%. However, their method to calculate these figures is deeply problematic, in that they compare the average housing prices between a postcode area where a target supermarket and an area in the same town where it is not. This approach disregards heterogeneity in amenities in different areas and creates a downward bias to areas without any of the target supermarkets, which makes it difficult to isolate the effects of supermarket amenities especially in densely populated areas such as London. I will investigate the effects of supermarket amenities in a more rigorous manner by controlling for other key measures of accessibility to economic activities within the framework of Alonso (1964) and Rosen (1974). Given the complexity of urban amenities, I compile and synthesise several datasets from different sources for empirical analyses of the monocentric city model and hedonic pricing model.  In doing so, Section \ref{section:data} first describes the data sources and their properties, followed by Section \ref{section:variables} where I carefully construct variables from these datasets.
 
 
 \section{Data} \label{section:data}
@@ -127,11 +138,11 @@ An important aspect of daily consumption accessibility that affects individuals 
 The geographic unit for this paper's analysis is based on output areas (OAs) which have been the basis for UK Census since 2001, and are designed to be homogeneous in terms of population sizes and household characteristics (Office for National Statistics, 2019). For compatibility with the housing prices data, an aggregate measure of Middle Layer Super Output Areas (MSOA) is obtained from London Datastore for the empirical analyses throughout the paper with the population ranging from 5000 to 15000 and number of households from 2000 to 6000, where, in the case of Greater London, there are 984 MSOAs and the average population of 8,346 in 2010 (Greater London Authority, 2014).
 
 \subsection{Housing Prices}
-Urban rent in each neighbourhood is approximated by property sales registered with Land Registry (2019) which records property sales at the individual dwelling level. This is aggregated for each MSOA at the end of the calendar year for mean and median prices. Table 1 shows descriptive statistics for mean housing prices for each MSOA for the year of 2018, which clearly shows that the prices are not normally distributed with the mean value almost approaching the 75\% percentile, as this is skewed by significantly high housing prices in West London. Figure 1 maps the geographical distribution of mean housing prices visually both on raw and the log scale.
+Urban rent in each neighbourhood is approximated by property sales registered with Land Registry (2019) which records property sales at the individual dwelling level. This is aggregated for each MSOA at the end of the calendar year for mean and median prices. Table \ref{table:housing} shows descriptive statistics for mean housing prices for each MSOA for the year of 2018, which clearly shows that the prices are not normally distributed with the mean value almost approaching the 75\% percentile, as this is skewed by significantly high housing prices in West London. Figure \ref{fig:price_distribution} maps the geographical distribution of mean housing prices visually both on raw and the log scale.
 
 \begin{table}[H]
 \caption{Descriptive Statistics for Mean Housing Prices (GBP)} 
-  \label{} 
+  \label{table:housing} 
 \begin{tabular}{lrrrrrrrr}
 \toprule
 {} &  count &       mean &        std &       min &       25\% &       50\% &       75\% &        max \\
@@ -160,11 +171,11 @@ Value &  983.0 &  603715.49 &  387541.06 &  226536.0 &  391267.0 &  495010.0 &  
 \end{figure}
 
 \subsection{Distance}
-Each MSOA is defined as a polygon with edges represented with geographic coordinates (i.e. Trafalgar Square is at 51.5080 N, 0.1281 W), which will be the basis for the geometric distance measure between each MSOA and the CBD in Section \ref{section:variables}. The second distance measure is morning commuting time on the road, which is approximated from Uber Movement data (2019) that provides anonymised travel data in the form of summary statistics such as mean travel times and standard deviation at a given hour of the day. This data covers major cities in North America, Europe, Australia and India where Uber usage is high, and for Greater London quarterly data is available since 2016.
+Each MSOA is defined as a polygon with edges represented with geographic coordinates of latitudes and longitudes (i.e. Trafalgar Square is at 51.5080 N, 0.1281 W), which will be the basis for the geometric distance measure between each MSOA and the CBD in Section \ref{section:variables}. The second distance measure is morning commuting time on the road, which is approximated from Uber Movement data (2019) that provides anonymised travel data in the form of summary statistics such as mean travel times and standard deviation at a given hour of the day. This data covers major cities in North America, Europe, Australia and India where Uber usage is high, and for Greater London quarterly data is available since 2016.
 
-\subsection{Geographical Features}
-The central focus of this paper is the use of geographical features from OpenStreetMap, which is a collaborative mapping scheme launched in 2004.
-
+\subsection{Geographic Information}
+The central focus of this paper is the use of geographic features from OpenStreetMap, which is a collaborative mapping scheme launched in 2004. Map data is based on systematic ground surveys by registered contributors.
+The crucial feature of this data is the standardised tags that store metadata of the map objects, which come in forms of points, lines, and polygons based on the geographic coordinate system. For instance, an object may consist of key-value pairs of:  \texttt{\{name:'Tesco', building:'supermarket', landuse:'retail'\}} as well as an ordered pair of logtitude and latitude  as coordinates or a vector of coordinates if it is a polygon. Importantly, \texttt{landuse}, \texttt{building} and \texttt{landuse} take standardised values to represent different entities. Other keys that are important are \texttt{type, natural, sport, leisure, historic, tourism, amenity} and \texttt{shop}. I exploit this structure in constructing variables for consumption amenities including supermarkets, in addition to land use and nature controls.
 
 \subsection{Private School Data} \label{subsection:school}
 As Niu and Liu (2017) highlighted, accessibility to good schools is an important factor in the household consumption choices of housing. A salient feature of the British educational system is the established presence of private schools that educates 7\% of all children. Ndaji et al. (2016) investigate the difference in educational achievements between independent schools and state schools in the United Kingdom, and demonstrate that students in independent schools had better results by 0.64 GCSE grades, controlling for prior academic ability, socioeconomic disadvantages, and gender differences. This discrepancy is equivalent to additional two years of schooling by the age of 16. Hence, I posit that private school is a desirable education amenity that households with children are especially attracted to. As OpenStreetMap does not provide school type in details, I compile an original dataset for private schools in Greater London in a programmatic manner by scraping a web page by Independent Schools Concil (2019), which provides a comprehensive list of private schools in London providing primary and secondary education. Addresses are then converted into longitudes and latitudes using the \texttt{geocoders.Nominatim} module from \texttt{geopy} library in Python, such that each school falls onto one of the MSOAs.
@@ -210,11 +221,25 @@ where $C_{ki}$ and $C_{kj}$ are longitude and latitude for the centroid, respect
 where $r$ is the radius of earth in a desired unit of length, which in this case miles with $r = 3956$. 
 
 \subsubsection{Uber Movement Distance}
-To approximate the morning commuting cost, I utilise aggregated Uber Movement data (Uber Movement, 2019) from weekdays in 2017 by calculating the pairwise average time of Uber rides between the CBD and a given MSOA during the AM peak period of 7:00-10:00 AM. It is noteworthy that these two MSOAs do not necessarily have a origin-destination relationship, as Uber's GPS records all subsequent locations from the origin as it traverses through different areas to the final destination (Uber Movement, n.d.). The primary advantage of commuting time measure instead of geometric distance is that it accounts for traffic bottlenecks that stem from terrain structures and road connections. One such instance that demonstrates this advantage with this relatively new dataset is a study by Uber Movement Team (2018) that examines the effect of the closure of the London Tower Bridge. As there is a limited number of bridges across the River Thames, the three-month closure in late 2016 due for structural maintenance led to significantly higher levels of traffic on both sides of the bridge, increasing travel times by up to 65\% for southbound trips and up to 30\% for northbound trips. This variable addresses the problematic assumption of a featureless urban area in the monocentric city model, as it accounts for a nontrivial terrain feature that cuts through the area that is the River Thames in the case of London. 
-
-demonstrated in \ref{fig:log_log}
+To approximate the morning commuting cost, I utilise aggregated Uber Movement data (Uber Movement, 2019) from weekdays in 2017 by calculating the pairwise average time of Uber rides between the CBD and a given MSOA during the AM peak period of 7:00-10:00. It is noteworthy that these two MSOAs do not necessarily have a origin-destination relationship, as Uber's GPS records all subsequent locations from the origin as it traverses through different areas to the final destination (Uber Movement, n.d.). The primary advantage of commuting time measure instead of geometric distance is that it accounts for traffic bottlenecks that stem from terrain structures and road connections. One such instance that demonstrates this advantage with this relatively new dataset is a study by Uber Movement Team (2018) that examines the effect of the closure of the London Tower Bridge. As there is a limited number of bridges across the River Thames, the three-month closure in late 2016 due for structural maintenance led to significantly higher levels of traffic on both sides of the bridge, increasing travel times by up to 65\% for southbound trips and up to 30\% for northbound trips. This variable addresses the problematic assumption of a featureless urban area in the monocentric city model, as it accounts for a nontrivial terrain feature that cuts through the area that is the River Thames in the case of London. 
 
 \subsubsection{Log Transformation and Data Distribution}
+Figure \ref{fig:price_distribution} demonstrated that the distribution of mean housing prices across MSOAs has a long right tail due to extremely high values around the CBD. Both distance measures constructed in this subsection are also slightly skewed as shown in Table \ref{table:distance} with high values towards the right end of the distribution. The units are miles for \texttt{dist\_miles} and seconds for \texttt{dist\_uber}. Figure \ref{fig:log_log} visualises the log-log linear relationships between these distance measures and mean housing prices. As they allow for interpretation in terms of percentage changes in explanatory and dependent variables, log-scaled values are used for the model specifications in Section \ref{subsection:specifications}.
+
+\begin{table}[H]
+\centering
+\caption{Descriptive Statistics for Distance Measures} 
+  \label{table:distance} 
+\begin{tabular}{lrrrrrrrr}
+\toprule
+{} &  count &     mean &     std &     min &      25\% &      50\% &      75\% &      max \\
+\midrule
+dist\_miles     &  714.0 &     6.58 &    3.08 &    0.57 &     4.21 &     6.37 &     8.83 &    16.12 \\
+dist\_uber &  714.0 &  2151.82 &  815.78 &  183.22 &  1604.15 &  2165.57 &  2730.87 &  4294.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \begin{figure}[H]
   \begin{subfigure}{.5\textwidth}
       \centering
@@ -232,19 +257,32 @@ demonstrated in \ref{fig:log_log}
   \label{fig:log_log}
 \end{figure}
 
-\subsection{Geographical Features from OpenStreetMap}
+\subsection{Local Amenities from OpenStreetMap}
+
+from polygons and points
+
+count of a given amenity within a given MSOA
+
+the pure count is considered to be 
+
+first to use this method
+
+within-class homogeneity is assumed
+
+decreasing returns to scale and spillover effects discussed in \ref{subsection:limitations}
+
+supermarket amenities
 
 \section{Empirical Analysis} \label{section:model}
-\subsection{Model Specifications}
+\subsection{Model Specifications} \label{subsection:specifications}
 The first part of this empirical analysis is concerned with investigating into the the coefficient for the linear 
 
 \begin{gather}
 ln(P) = b + \tau_1 ln(dist\_miles) + \epsilon \\
-ln(P) = b + \tau_2 ln(uber\_dist) + \epsilon
+ln(P) = b + \tau_2 ln(dist\_uber) + \epsilon
 \end{gather}
 
 \subsection{Results}
-
 \subsubsection{Monocentric City Model}
 
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
@@ -264,7 +302,7 @@ ln(P) = b + \tau_2 ln(uber\_dist) + \epsilon
  dist\_miles\_log & $-$0.583$^{***}$ &  \\ 
   & (0.021) &  \\ 
   & & \\ 
- uber\_dist\_mean\_log &  & $-$0.649$^{***}$ \\ 
+ dist\_uber\_mean\_log &  & $-$0.649$^{***}$ \\ 
   &  & (0.025) \\ 
   & & \\ 
  Constant & 14.299$^{***}$ & 18.197$^{***}$ \\ 
@@ -280,7 +318,7 @@ Adjusted R$^{2}$ & 0.525 & 0.477 \\
 \end{tabular} 
 \end{table} 
 
-I follow Clogg et al. (1995) to examine the difference between the two coefficients $\tau_1$ and $\tau_2$ in two different models, and calculate that $Z = \frac{\tau_1 - \tau_2}{\sqrt{(SE\tau_1)^2 + (SE\tau_2)^2}}  = \frac{-0.583 - (-0.649)}{\sqrt{0.021)^2 + (0.025)^2}} = 2.021$. $P(Z > 2.021) = 0.022$, which is statistically significant at the 5\% level. 
+I follow Clogg et al. (1995) to examine the difference between the two coefficients $\tau_1$ and $\tau_2$ in two different models, and calculate that $Z = \frac{\tau_1 - \tau_2}{\sqrt{(SE\tau_1)^2 + (SE\tau_2)^2}}  = \frac{-0.583 - (-0.649)}{\sqrt{0.021)^2 + (0.025)^2}} = 2.021$, with $P(Z > 2.021) = 0.022$  which is statistically significant at the 5\% level. 
 
 
 
@@ -458,9 +496,6 @@ Residual Std. Error (df = 926) & 0.258 & 0.486 \\
 \end{tabular} 
 \end{table} 
 
-Wooldridge 235
-log hourly wage equation
-
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: Wed, Mar 27, 2019 - 06:27:15
 \begin{table}[H] \centering 
@@ -513,12 +548,28 @@ t-value & $-4.292$ & $-0.718$ & $1.419$ & $-1.883$ & $1.066$ & $-1.424$ & $0.243
 Pr(\textgreater \textbar t\textbar ) & $0.00002$ & $0.473$ & $0.156$ & $0.060$ & $0.287$ & $0.155$ & $0.808$ & $0.306$ & $0.315$ & $0.875$ \\ 
 \hline \\[-1.8ex] 
 \end{tabular} 
-\end{table} 
+\end{table}
+
+
+low coefficient sensible
+
+no rigorous DID such as Pope and Pope (2015) and Barrett (2016)
+
+lack of data for opening, announcement and closing date
+measurement errors from openstreetmap data
+
+higher land prices during development period if its on a new soil
+ prices already priced in
+
+converted stores?
+
+
+
     
 \section{Discussion} \label{section:discussion}
 
 \subsection{External Validity}
-\subsection{Limitations and Future Work}
+\subsection{Limitations and Future Work} \label{subsection:limitations}
 
 \section{Conclusion} \label{section:conclusion}
 
