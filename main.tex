@@ -11,6 +11,7 @@
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{amsmath}
 \usepackage[numbers]{natbib}
 \usepackage{float}
 \usepackage[nottoc]{tocbibind}
@@ -91,7 +92,7 @@ where $\overline{r}$ is the rent in the CBD and $\underline{d}$ is the lower bou
 \begin{center}
 $p _ { H } ( d ) = \overline { r } - \tau d$
 \end{center}
-This will be the basis of the univariate regression models where I estimate the coefficient $\tau$ associated with two measures of distance between the CBD and a given area; orthodromic distance and commuting time cost approximated by Uber Movement Data. $\overline{r}$ is the constant term which represents the rent in the CBD at distance $d = 0$.
+This will be the basis of the univariate regression models where I estimate the coefficient $\tau$ associated with two measures of distance between the CBD and a given area; orthodromic distance and commuting time cost approximated by Uber Movement Data (Uber Movement, 2019). $\overline{r}$ is the constant term which represents the rent in the CBD at distance $d = 0$.
 
 \subsection{Heterogeneous Amenities and Hedonic Pricing Model}
 In the simple monocentric model, it was assumed that the city is a featureless plane without any urban amenities such as restaurants and cafes. This assumption is now relaxed by introducing heterogeneity in amenities where each subsection of the city has its own characteristics that residents assign specific values to. This is an extension of the hedonic pricing model by Rosen (1974) where a product is valued by its internal characteristics and external factors that are both homogeneous and objective. In Rosen's model, the class of products offers a package of quantifiable characteristics represented by a vector 
@@ -108,26 +109,25 @@ where $z_i$ is the $i$-th characteristic on a plane of features, which in our ca
 
 The existence of market equilibrium in pure competition and decomposition of products into attributes $z_i$ is the theoretical grounding of the multivariate regressions of this paper, where the first element is the distance from the CBD and $2, 3, ..., n$-th elements are features based on geographical distributions of urban amenities.
 
-This paper confines its scope to sections of London boroughs defined as Middle Layer Super Output Area (MSOA) which was created to provide a statistical overview of the population, with an average of 8346 in 2010 (The Greater London Authority, 2014). While the hedonic pricing model is often applied for a smaller unit of housing such as a house or a flat, Rosen's criterion for objectivity is better suited for neighbourhood characteristics as some factors in a individual housing unit such as architectural styles and view from the window could entail heterogeneous preferences that are prone to subjectivity.
+While the hedonic pricing model is often applied for a smaller unit of housing such as a house or a flat, Rosen's criterion for objectivity is better suited for neighbourhood characteristics which this paper primarily investigates as some factors in a individual housing unit such as architectural styles and view from the window could entail heterogeneous preferences that are prone to subjectivity.
 
-\subsection{Monocentricity Assumption and Current Research on Housing Prices}
+\subsection{Monocentricity Assumption and Current Research on Housing Prices} \label{subsection:review}
 Bid rent theory remains heavily influential in empirical investigations in urban economics, and location has been a dominant explanatory factor for housing prices and urban structures. However, the assumption of monocentric cities has been actively contested both in theoretical and empirical terms. Fujita and Ogawa (1982) criticise the exogenous location of the CBD, and provide general equilibrium models where employment centres are endogenously determined by firms and agents.
 From an empirical point of view, McMillen (2001) highlights the rise of polycentric city structures in the United States, and identifies employment subcenters in Milwaukee, where employment opportunities are scattered around across the metropolitan area with only 6.7\% of them located in the CBD. A more systematic study is conducted by Arribas-Bel and Sanz-Gracia (2014). They analyse the time trend of high employment density in 359 U.S. metropolitan areas in 1990, 2000, and 2010, and find that employment centres are still largely concentrated centrally, with 57\% of all metropolitan areas exhibiting monocentric structures in 2010. It is noteworthy that there is a large variance in employment share figures in these studies, depending on the definition and scope of the CBD. In general, while there is an increasing number of empirical studies that showcase the polycentric urban structures, the assumption of single-core centres appears to hold across modern metropolitan areas. 
 
-In the context of London, European Commission (1999) describes London as a monocentric city given the strong transport connectivity to the periphery areas and concentration of economic activities in the city. On the other hand, there is limited yet meaningful evidence of the polycentric nature of London. Utilising the large scale data of Oyster card transactions in the London subway, Roth et al. (2011) investigate the individual intraurban flows with the Tube network to identify several basins of attraction in London, the largest of which is West End followed by the City of London area. Importantly, they also demonstrate the significance of the Docklands area where a number of financial firms are located. Similarly, Park (2011) studies commuting flows based on the 2001 Census and Office for National Statistics data, and identifies a cluster of employment in Westminster, Camden and City areas. Despite the evidence of heterogeneity especially within the central London, the monocentric structure seems to be present in the scale of Greater London. Hence, this paper follows Park (2011) and impose Alonso's (1964) original assumption of monocentricity in examining London's urban structure. Identification of the CBD is further explored in Section \ref{subsection:CBD}.
+In the context of London, European Commission (1999) describes London as a monocentric city given the strong transport connectivity to the periphery areas and concentration of economic activities in the city. On the other hand, there is limited yet meaningful evidence of the polycentric nature of London. Utilising the large scale data of Oyster card transactions in the London subway, Roth et al. (2011) investigate the individual intraurban flows with the Tube network to identify several basins of attraction in London, the largest of which is West End followed by the City of London area. Importantly, they also demonstrate the significance of the Docklands area where a number of financial firms are located. Similarly, Park (2011) studies commuting flows based on labour market statistics, and identifies a cluster of employment in Westminster, Camden and the City areas. Despite the evidence of heterogeneity especially within the central London, the monocentric structure seems to be present in the scale of Greater London. Hence, this paper follows Park (2011) and impose Alonso's (1964) assumption of monocentricity in examining London's urban structure. Identification of the CBD is further explored in Section \ref{subsection:CBD}.
 
 Regarding urban amenities, Niu and Liu (2017) provide several proxies to measure accessibility to key economic activities in modelling urban housing price in Beijing. In addition to the employment centre, they investigate the effects of education, consumption and medical accessibility, and calculate the household demand structure for housing prices. They demonstrate that the employment accessibility has by far the highest importance as an economic activity, followed education and consumption and medical services. While their results are limited in statistical significance and the scope, their findings motivate the construction of measures of consumption accessibility through the number of supermarkets, and education accessibility in the form of private schools in Section \ref{subsection:school}. In relation to education, Department for Education (2017) finds that home prices in England have a price premium near the schools in the top 10 percent in terms of standardised test performance, where house prices are higher by 8.0\% for primary schools and 6.4\% for secondary schools, holding everything constant.
 
-An important aspect of daily consumption accessibility that affects individuals universally across socioeconomic strata is supermarkets. Despite the lack of rigorous academic research specifically into supermarket amenities, Lloyds Bank's (2016) research into the housing premium of different supermarket chains at the post code level was influential in the British media which led to the popularisation of the term "the Waitrose effect" (The Independent, 2017). Supermarkets in general are associated with positive housing price premium in varying degrees, with Waitrose and Sainsbury's having a strong premium of £38,666 and £27,939 on average, followed by Marks and Spencer (£27,1812), Tesco (£22,072), Iceland(£20,034), Coop (£17,904), and Morrisons (£10,558). The lower end of distribution includes discount supermarkets such as Asda, Lidl, and Aldi which have marginal levels of premium at £5,026, £3,926 and £1,333, respectively. This translates into a premium of 10\% for Waitrose and Sainsbury's, while those of Asda, Lidl and Aldi are limited to 1-2\%. However, their method to calculate these figures is deeply problematic, in that they compare the average housing prices between a postcode area where a target supermarket and an area in the same town where it is not. This approach disregards heterogeneity in amenities in different areas and creates a downward bias to areas without any of the target supermarkets, which makes it difficult to isolate the effects of supermarket amenities especially in densely populated areas such as London. Reflecting on this, I will construct a linear model of housing prices controlling for other accessibility measures that affect the housing prices. 
+An important aspect of daily consumption accessibility that affects individuals universally across socioeconomic strata is supermarkets. Despite the lack of rigorous academic research specifically into supermarket amenities, Lloyds Bank's (2016) research into the housing premium of different supermarket chains at the post code level was influential in the British media which led to the popularisation of the term "the Waitrose effect" (The Independent, 2017). Supermarkets in general are associated with positive housing price premium in varying degrees, with Waitrose and Sainsbury's having a strong premium of £38,666 and £27,939 on average, followed by Marks and Spencer (£27,1812), Tesco (£22,072), Iceland(£20,034), Coop (£17,904), and Morrisons (£10,558). The lower end of distribution includes discount supermarkets such as Asda, Lidl, and Aldi which have marginal levels of premium at £5,026, £3,926 and £1,333, respectively. This translates into a premium of 10\% for Waitrose and Sainsbury's, while those of Asda, Lidl and Aldi are limited to 1-2\%. However, their method to calculate these figures is deeply problematic, in that they compare the average housing prices between a postcode area where a target supermarket and an area in the same town where it is not. This approach disregards heterogeneity in amenities in different areas and creates a downward bias to areas without any of the target supermarkets, which makes it difficult to isolate the effects of supermarket amenities especially in densely populated areas such as London. I will investigate the effects of supermarket amenities in a more rigorous manner by controlling for other key measures of accessibility to economic activities within the framework of Alonso (1964) and Rosen (1974). Given the complexity of urban amenities, I compile and synthesise several datasets from different sources for empirical analyses of the monocentric city model and hedonic pricing model.  In doing so, Section \ref{section:data} first describes the data sources and their properties, followed by Section \ref{section:variables} where I carefully construct variables from these datasets.
 
 
 \section{Data} \label{section:data}
 \subsection{Geographic Boundaries}
-The geographic unit for this paper's analysis is based on output areas (OAs) which have been the basis for UK Census since 2001, and are designed to be homogeneous in terms of population sizes and household characteristics (Office for National Statistics, 2019). For compatibility with the housing prices data, an aggregate measure of Middle Layer Super Output Areas (MSOA) is obtained from London Datastore (201 for the empirical analyses throughout the paper with the population ranging from 5000 to 15000 and number of households from 2000 to 6000, where, in the case of Greater London, there are 984 MSOAs and the average population of 8346 in 2010 (Greater London Authority, 2014).
+The geographic unit for this paper's analysis is based on output areas (OAs) which have been the basis for UK Census since 2001, and are designed to be homogeneous in terms of population sizes and household characteristics (Office for National Statistics, 2019). For compatibility with the housing prices data, an aggregate measure of Middle Layer Super Output Areas (MSOA) is obtained from London Datastore for the empirical analyses throughout the paper with the population ranging from 5000 to 15000 and number of households from 2000 to 6000, where, in the case of Greater London, there are 984 MSOAs and the average population of 8,346 in 2010 (Greater London Authority, 2014).
 
 \subsection{Housing Prices}
-Urban rent in each neighbourhood is approximated by property sales registered with Land Registry (2019) which records property sales at the individual dwelling level. This is aggregated for each MSOA at the end of the calendar year for mean and median prices. Table 1 shows descriptive statistics for mean housing prices for each MSOA for the year of 2017, which clearly shows that the prices are not normally distributed with the mean value almost approaching the 75\% percentile, as this is skewed by significantly high housing prices in the central London. Figure 1 maps the geographical distribution of mean housing prices visually both on raw and the log scale.
-
+Urban rent in each neighbourhood is approximated by property sales registered with Land Registry (2019) which records property sales at the individual dwelling level. This is aggregated for each MSOA at the end of the calendar year for mean and median prices. Table 1 shows descriptive statistics for mean housing prices for each MSOA for the year of 2018, which clearly shows that the prices are not normally distributed with the mean value almost approaching the 75\% percentile, as this is skewed by significantly high housing prices in West London. Figure 1 maps the geographical distribution of mean housing prices visually both on raw and the log scale.
 
 \begin{table}[H]
 \caption{Descriptive Statistics for Mean Housing Prices (GBP)} 
@@ -160,39 +160,43 @@ Value &  983.0 &  603715.49 &  387541.06 &  226536.0 &  391267.0 &  495010.0 &  
 \end{figure}
 
 \subsection{Distance}
-Each MSOA is defined as a polygon with edges represented with geographic coordinates (i.e. Trafalgar Square is at 51.5080 N, 0.1281 W), which will be the basis for the geometric distance measure between each MSOA and the CBD in Section \ref{section:variables}. The second distance measure is morning commuting time on the road, which is approximated from Uber Movement data (2019) that provides anonymised travel data in the form of summary statistics such as mean travel times and standard deviation at a given hour of the day. This data covers major cities in North America, Europe, Australia and India where Uber usage is high, and quarterly data is available for London since 2016.
+Each MSOA is defined as a polygon with edges represented with geographic coordinates (i.e. Trafalgar Square is at 51.5080 N, 0.1281 W), which will be the basis for the geometric distance measure between each MSOA and the CBD in Section \ref{section:variables}. The second distance measure is morning commuting time on the road, which is approximated from Uber Movement data (2019) that provides anonymised travel data in the form of summary statistics such as mean travel times and standard deviation at a given hour of the day. This data covers major cities in North America, Europe, Australia and India where Uber usage is high, and for Greater London quarterly data is available since 2016.
 
 \subsection{Geographical Features}
 The central focus of this paper is the use of geographical features from OpenStreetMap, which is a collaborative mapping scheme launched in 2004.
 
 
 \subsection{Private School Data} \label{subsection:school}
-Ndaji et al. (2016) investigate the difference in educational achievements between independent schools and state schools in the United Kingdom, and demonstrate that students in independent schools had better results by 0.64 GCSE grades, controlling for prior academic ability, socioeconomic disadvantages, and gender differences. This discrepancy is equivalent to additional two years of schooling by the age of 16. Hence, I posit that private school is a desirable education amenity that households with children are especially attracted to. As OpenStreetMap does not provide school type in details, I compile an original dataset for private schools in Greater London in a programmatic manner by scraping a web page by Independent Schools Concil (2019), which provides a comprehensive list of private schools in London providing primary and secondary education. Addresses are then converted into longitudes and latitudes using the \texttt{geocoders.Nominatim} module from \texttt{geopy} library in Python, such that each school falls onto one of the MSOAs.
+As Niu and Liu (2017) highlighted, accessibility to good schools is an important factor in the household consumption choices of housing. A salient feature of the British educational system is the established presence of private schools that educates 7\% of all children. Ndaji et al. (2016) investigate the difference in educational achievements between independent schools and state schools in the United Kingdom, and demonstrate that students in independent schools had better results by 0.64 GCSE grades, controlling for prior academic ability, socioeconomic disadvantages, and gender differences. This discrepancy is equivalent to additional two years of schooling by the age of 16. Hence, I posit that private school is a desirable education amenity that households with children are especially attracted to. As OpenStreetMap does not provide school type in details, I compile an original dataset for private schools in Greater London in a programmatic manner by scraping a web page by Independent Schools Concil (2019), which provides a comprehensive list of private schools in London providing primary and secondary education. Addresses are then converted into longitudes and latitudes using the \texttt{geocoders.Nominatim} module from \texttt{geopy} library in Python, such that each school falls onto one of the MSOAs.
 
 \section{Variable Construction} \label{section:variables}
-\subsection{Defining the City Centre}\label{subsection:CBD}
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.5\linewidth]{images/cbd.png}
-  \caption{Distribution of CBD functions in London (Greater London Authority, 2008)}
-  \label{fig:cbd}
-\end{figure}
+Based on the theoretical frameworks and amenities identified in Section \ref{section:lit}, I construct key variables for distance measures and local amenities from data sources introduced in the previous section.
+\subsection{Defining the CBD}\label{subsection:CBD}
+As the first part of Section \ref{subsection:review} underlined, the exogenous determination of the CBD is a strong assumption in empirical applications of the monocentric city model.  Greater London Authority (2008) qualitatively identifies several sub-centres within inner London (Figure \ref{fig:cbd}). While different CBD functions span horizontally in the north of the River Thames, there appears to be an agglomeration in the West where several industries overlap such as retail, real estate, accounting and consulting, media and creative, and higher education. Park (2011) demonstrates this trend by constructing commuting network into inner London using labour market statistics that records origin-destination trips between local authorities. Figure \ref{fig:park2011} illustrates the commuting patterns in Greater London where the size of each vertex is a linear function of the number of commuting inflows with the direction indicated by an arrow. He identifies a cluster of employment in three boroughs of London as prominent destinations; Camden; Westminster; and the City. Taking these observations into account, this paper assumes  \texttt{Westminster 019}  to be the CBD where London Victoria station is located, that handles a significant amount of traffic inflow as a central London railway terminus with connections to several Tube lines that lead to the city centre. While this does not necessarily reflect the original definition by Alonso (1964) that describes the CBD as an area of workplaces given the small size of the MSOA relative to Greater London, I posit that the commuting inflows and the existence of a transportation hub is a strong indicator of employment accessibility in the modern metropolitan context.
+
 
 \begin{figure}[H]
+\begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=0.5\linewidth]{images/park2011.png}
-  \caption{Commute Network into Central London (Park, 2011)}
+  \includegraphics[width=.9\linewidth]{images/cbd.png}
+\caption{Distribution of CBD functions (GLA, 2008)}
   \label{fig:cbd}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{images/park2011.png}
+  \caption{Commuting patterns in Greater London (Park, 2011)}
+  \label{fig:park2011}
+\end{subfigure}
+\caption{CBD functions in London}
+\label{fig:2}
 \end{figure}
-
-
-Michaels \& Smith (1990) on market segmentation and necessity for multiple price functions -> not truly monocentric - commuting functions
 
 
 \subsection{Distance Measures}
 The following illustrates how two measures of distance are constructed. To ensure an approximately normal distribution, both distance measures are log-transformed in the regression models.
 \subsubsection{Orthodromic Distance}
-The first measure of distance is the distance between two points on a sphere; the centroid of a given area $C_k$ and the centroid of the CBD, $C_0$, which is then converted to miles for ease of interpretation. Each MSOA is represented by a simple polygon where each vertex consists of longitude and latitude in the standard geographic coordinate system (Bolstad, 2016). Let $v_{i,j}$ be a vertex in a N-gon where $v_i$ is a longitude and $v_j$ is a latitude. Then the centroid for a given $k$ is expressed as 
+The first measure of distance is the distance between two points on a sphere; the centroid of a given area $C_k$ and the centroid of the CBD, $C_0$, which is then converted to miles for ease of interpretation. By construction, each MSOA is represented by a simple polygon where each vertex consists of longitude and latitude in the standard geographic coordinate system (Bolstad, 2016). Let $v_{i,j}$ be a vertex in a N-gon where $v_i$ is a longitude and $v_j$ is a latitude. Then the centroid for a given $k$ is expressed as 
 
 \begin{center}
     $C_k = (C_{ki}, C_{kj})  = (\frac{1}{n} \Sigma_{i=1}^{N} v_i, \frac{1}{n} \Sigma_{j=1}^{N} v_j) $
@@ -206,9 +210,11 @@ where $C_{ki}$ and $C_{kj}$ are longitude and latitude for the centroid, respect
 where $r$ is the radius of earth in a desired unit of length, which in this case miles with $r = 3956$. 
 
 \subsubsection{Uber Movement Distance}
+To approximate the morning commuting cost, I utilise aggregated Uber Movement data (Uber Movement, 2019) from weekdays in 2017 by calculating the pairwise average time of Uber rides between the CBD and a given MSOA during the AM peak period of 7:00-10:00 AM. It is noteworthy that these two MSOAs do not necessarily have a origin-destination relationship, as Uber's GPS records all subsequent locations from the origin as it traverses through different areas to the final destination (Uber Movement, n.d.). The primary advantage of commuting time measure instead of geometric distance is that it accounts for traffic bottlenecks that stem from terrain structures and road connections. One such instance that demonstrates this advantage with this relatively new dataset is a study by Uber Movement Team (2018) that examines the effect of the closure of the London Tower Bridge. As there is a limited number of bridges across the River Thames, the three-month closure in late 2016 due for structural maintenance led to significantly higher levels of traffic on both sides of the bridge, increasing travel times by up to 65\% for southbound trips and up to 30\% for northbound trips. This variable addresses the problematic assumption of a featureless urban area in the monocentric city model, as it accounts for a nontrivial terrain feature that cuts through the area that is the River Thames in the case of London. 
 
-\subsubsection{Data Distribution}
+demonstrated in \ref{fig:log_log}
 
+\subsubsection{Log Transformation and Data Distribution}
 \begin{figure}[H]
   \begin{subfigure}{.5\textwidth}
       \centering
@@ -230,11 +236,21 @@ where $r$ is the radius of earth in a desired unit of length, which in this case
 
 \section{Empirical Analysis} \label{section:model}
 \subsection{Model Specifications}
+The first part of this empirical analysis is concerned with investigating into the the coefficient for the linear 
+
+\begin{gather}
+ln(P) = b + \tau_1 ln(dist\_miles) + \epsilon \\
+ln(P) = b + \tau_2 ln(uber\_dist) + \epsilon
+\end{gather}
+
 \subsection{Results}
+
 \subsubsection{Monocentric City Model}
-% monocentric city model
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Wed, Mar 27, 2019 - 03:21:58
 \begin{table}[H] \centering 
-  \caption{Commuting cost estimate} 
+  \caption{Commuting cost comparison} 
   \label{} 
 \small 
 \begin{tabular}{@{\extracolsep{-10pt}}lcc} 
@@ -245,141 +261,163 @@ where $r$ is the radius of earth in a desired unit of length, which in this case
 \\[-1.8ex] & \multicolumn{2}{c}{log\_price} \\ 
 \\[-1.8ex] & (1) & (2)\\ 
 \hline \\[-1.8ex] 
- dist\_miles\_log & $-$0.584$^{***}$ &  \\ 
+ dist\_miles\_log & $-$0.583$^{***}$ &  \\ 
   & (0.021) &  \\ 
   & & \\ 
- uber\_dist\_mean\_log &  & $-$0.651$^{***}$ \\ 
-  &  &                                                                                                                                                                   (0.025) \\ 
+ uber\_dist\_mean\_log &  & $-$0.649$^{***}$ \\ 
+  &  & (0.025) \\ 
   & & \\ 
- Constant & 14.299$^{***}$ & 18.216$^{***}$ \\ 
-  & (0.038) & (0.194) \\ 
+ Constant & 14.299$^{***}$ & 18.197$^{***}$ \\ 
+  & (0.038) & (0.193) \\ 
   & & \\ 
 \hline \\[-1.8ex] 
-Observations & 726 & 726 \\ 
-R$^{2}$ & 0.525 & 0.475 \\ 
-Adjusted R$^{2}$ & 0.525 & 0.474 \\ 
+Observations & 714 & 714 \\ 
+R$^{2}$ & 0.526 & 0.478 \\ 
+Adjusted R$^{2}$ & 0.525 & 0.477 \\ 
 \hline 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
 \end{table} 
 
+I follow Clogg et al. (1995) to examine the difference between the two coefficients $\tau_1$ and $\tau_2$ in two different models, and calculate that $Z = \frac{\tau_1 - \tau_2}{\sqrt{(SE\tau_1)^2 + (SE\tau_2)^2}}  = \frac{-0.583 - (-0.649)}{\sqrt{0.021)^2 + (0.025)^2}} = 2.021$. $P(Z > 2.021) = 0.022$, which is statistically significant at the 5\% level. 
+
+
 
 \subsubsection{Hedonic Pricing Model}
-% hedonic pricing model
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Wed, Mar 27, 2019 - 03:45:07
 \begin{table}[H] \centering 
   \caption{Cross-sectional OLS} 
   \label{} 
 \small 
-\begin{tabular}{@{\extracolsep{-10pt}}lcccccc} 
+\begin{tabular}{@{\extracolsep{-10pt}}lccccccc} 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
- & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-7} 
-\\[-1.8ex] & \multicolumn{6}{c}{log\_price} \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
+ & \multicolumn{7}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-8} 
+\\[-1.8ex] & \multicolumn{7}{c}{log\_price} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6) & (7)\\ 
 \hline \\[-1.8ex] 
- dist\_miles\_log & $-$0.513$^{***}$ & $-$0.491$^{***}$ & $-$0.478$^{***}$ & $-$0.464$^{***}$ & $-$0.463$^{***}$ & $-$0.438$^{***}$ \\ 
-  & (0.015) & (0.015) & (0.015) & (0.015) & (0.015) & (0.015) \\ 
-  & & & & & & \\ 
- supermarket\_high &  & 0.109$^{***}$ & 0.095$^{***}$ & 0.076$^{***}$ & 0.073$^{***}$ & 0.051$^{**}$ \\ 
-  &  & (0.023) & (0.022) & (0.022) & (0.022) & (0.022) \\ 
-  & & & & & & \\ 
- supermarket\_low &  & $-$0.157$^{***}$ & $-$0.130$^{***}$ & $-$0.113$^{***}$ & $-$0.112$^{***}$ & $-$0.109$^{***}$ \\ 
-  &  & (0.030) & (0.028) & (0.028) & (0.028) & (0.027) \\ 
-  & & & & & & \\ 
- residential &  &  & 0.008$^{***}$ & 0.009$^{***}$ & 0.009$^{***}$ & 0.008$^{***}$ \\ 
-  &  &  & (0.002) & (0.002) & (0.002) & (0.002) \\ 
-  & & & & & & \\ 
- retail &  &  & 0.0002 & 0.001 & 0.0004 & 0.0002 \\ 
-  &  &  & (0.002) & (0.002) & (0.002) & (0.002) \\ 
-  & & & & & & \\ 
- industrial &  &  & $-$0.031$^{***}$ & $-$0.026$^{***}$ & $-$0.026$^{***}$ & $-$0.024$^{***}$ \\ 
-  &  &  & (0.005) & (0.005) & (0.005) & (0.005) \\ 
-  & & & & & & \\ 
- construction &  &  & 0.011$^{**}$ & 0.006 & 0.006 & 0.006 \\ 
-  &  &  & (0.005) & (0.005) & (0.005) & (0.005) \\ 
-  & & & & & & \\ 
- commercial &  &  & 0.004 & $-$0.013$^{**}$ & $-$0.013$^{**}$ & $-$0.013$^{**}$ \\ 
-  &  &  & (0.005) & (0.006) & (0.006) & (0.006) \\ 
-  & & & & & & \\ 
-%  garden &  &  & 0.0004 & 0.0003 & 0.0003 & 0.0004 \\ 
-%   &  &  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
-%   & & & & & & \\ 
-%  pitch &  &  & 0.006$^{***}$ & 0.005$^{***}$ & 0.005$^{***}$ & 0.003$^{***}$ \\ 
-%   &  &  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
-%   & & & & & & \\ 
-%  park &  &  & $-$0.003 & $-$0.003$^{*}$ & $-$0.003$^{*}$ & $-$0.003 \\ 
-%   &  &  & (0.002) & (0.002) & (0.002) & (0.002) \\ 
-%   & & & & & & \\ 
-%  playground &  &  & $-$0.030$^{***}$ & $-$0.028$^{***}$ & $-$0.028$^{***}$ & $-$0.022$^{***}$ \\ 
-%   &  &  & (0.006) & (0.006) & (0.006) & (0.006) \\ 
-%   & & & & & & \\ 
-%  nature\_reserve &  &  & 0.009 & 0.018 & 0.017 & 0.036 \\ 
-%   &  &  & (0.028) & (0.027) & (0.027) & (0.026) \\ 
-%   & & & & & & \\ 
- golf\_course &  &  & 0.198$^{***}$ & 0.185$^{***}$ & 0.179$^{***}$ & 0.147$^{***}$ \\ 
-  &  &  & (0.035) & (0.034) & (0.034) & (0.033) \\ 
-  & & & & & & \\ 
-%  hotel &  &  &  & $-$0.002 & $-$0.002 & $-$0.002 \\ 
-%   &  &  &  & (0.004) & (0.004) & (0.004) \\ 
-%   & & & & & & \\ 
-%  attraction &  &  &  & 0.016$^{*}$ & 0.016$^{*}$ & 0.020$^{**}$ \\ 
-%   &  &  &  & (0.009) & (0.009) & (0.009) \\ 
-%   & & & & & & \\ 
-%  museum &  &  &  & 0.052$^{*}$ & 0.053$^{*}$ & 0.040 \\ 
-%   &  &  &  & (0.029) & (0.029) & (0.028) \\ 
-%   & & & & & & \\ 
-%  art &  &  &  & 0.037 & 0.037 & 0.002 \\ 
-%   &  &  &  & (0.024) & (0.024) & (0.023) \\ 
-%   & & & & & & \\ 
- restaurant &  &  &  & 0.005$^{**}$ & 0.005$^{**}$ & 0.006$^{**}$ \\ 
-  &  &  &  & (0.002) & (0.002) & (0.002) \\ 
-  & & & & & & \\ 
- pub &  &  &  & 0.005 & 0.004 & 0.004 \\ 
-  &  &  &  & (0.005) & (0.005) & (0.005) \\ 
-  & & & & & & \\ 
- cafe &  &  &  & 0.005 & 0.006 & 0.004 \\ 
-  &  &  &  & (0.006) & (0.006) & (0.005) \\ 
-  & & & & & & \\ 
- fast\_food &  &  &  & $-$0.022$^{***}$ & $-$0.022$^{***}$ & $-$0.021$^{***}$ \\ 
-  &  &  &  & (0.005) & (0.005) & (0.004) \\ 
-  & & & & & & \\ 
- school &  &  &  &  & 0.011$^{**}$ &  \\ 
-  &  &  &  &  & (0.005) &  \\ 
-  & & & & & & \\ 
- private\_school &  &  &  &  &  & 0.120$^{***}$ \\ 
-  &  &  &  &  &  & (0.014) \\ 
-  & & & & & & \\ 
- university &  &  &  &  & 0.004 & 0.002 \\ 
-  &  &  &  &  & (0.006) & (0.006) \\ 
-  & & & & & & \\ 
- Constant & 14.330$^{***}$ & 14.280$^{***}$ & 14.230$^{***}$ & 14.200$^{***}$ & 14.180$^{***}$ & 14.130$^{***}$ \\ 
-  & (0.035) & (0.036) & (0.037) & (0.038) & (0.040) & (0.038) \\ 
-  & & & & & & \\ 
+ dist\_miles\_log & $-$0.513$^{***}$ & $-$0.494$^{***}$ & $-$0.469$^{***}$ & $-$0.486$^{***}$ & $-$0.470$^{***}$ & $-$0.469$^{***}$ & $-$0.440$^{***}$ \\ 
+  & (0.015) & (0.015) & (0.015) & (0.015) & (0.015) & (0.015) & (0.015) \\ 
+  & & & & & & & \\ 
+ supermarkets\_high &  & 0.099$^{***}$ & 0.090$^{***}$ & 0.084$^{***}$ & 0.067$^{***}$ & 0.066$^{***}$ & 0.050$^{***}$ \\ 
+  &  & (0.020) & (0.020) & (0.019) & (0.019) & (0.019) & (0.018) \\ 
+  & & & & & & & \\ 
+ supermarkets\_middle &  & $-$0.024$^{*}$ & $-$0.027$^{**}$ & $-$0.018 & $-$0.019 & $-$0.022$^{*}$ & $-$0.023$^{*}$ \\ 
+  &  & (0.012) & (0.013) & (0.012) & (0.013) & (0.013) & (0.012) \\ 
+  & & & & & & & \\ 
+ supermarkets\_low &  & $-$0.143$^{***}$ & $-$0.116$^{***}$ & $-$0.112$^{***}$ & $-$0.095$^{***}$ & $-$0.093$^{***}$ & $-$0.088$^{***}$ \\ 
+  &  & (0.024) & (0.024) & (0.023) & (0.022) & (0.022) & (0.022) \\ 
+  & & & & & & & \\ 
+%  residential &  &  & 0.009$^{***}$ & 0.007$^{***}$ & 0.008$^{***}$ & 0.008$^{***}$ & 0.007$^{***}$ \\ 
+%   &  &  & (0.002) & (0.002) & (0.002) & (0.002) & (0.002) \\ 
+%   & & & & & & & \\ 
+%  retail &  &  & $-$0.001 & $-$0.0001 & 0.001 & 0.001 & 0.001 \\ 
+%   &  &  & (0.002) & (0.002) & (0.002) & (0.002) & (0.002) \\ 
+%   & & & & & & & \\ 
+%  industrial &  &  & $-$0.031$^{***}$ & $-$0.029$^{***}$ & $-$0.024$^{***}$ & $-$0.024$^{***}$ & $-$0.022$^{***}$ \\ 
+%   &  &  & (0.005) & (0.005) & (0.005) & (0.005) & (0.005) \\ 
+%   & & & & & & & \\ 
+%  construction &  &  & 0.010$^{*}$ & 0.011$^{**}$ & 0.009 & 0.008 & 0.008 \\ 
+%   &  &  & (0.005) & (0.005) & (0.005) & (0.005) & (0.005) \\ 
+%   & & & & & & & \\ 
+%  commercial &  &  & 0.003 & 0.004 & $-$0.019$^{***}$ & $-$0.018$^{***}$ & $-$0.018$^{***}$ \\ 
+%   &  &  & (0.005) & (0.005) & (0.006) & (0.006) & (0.006) \\ 
+%   & & & & & & & \\ 
+%  garden &  &  &  & 0.0004 & 0.0001 & 0.0001 & 0.0002 \\ 
+%   &  &  &  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
+%   & & & & & & & \\ 
+%  pitch &  &  &  & 0.006$^{***}$ & 0.005$^{***}$ & 0.005$^{***}$ & 0.003$^{**}$ \\ 
+%   &  &  &  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
+%   & & & & & & & \\ 
+%  park &  &  &  & $-$0.003 & $-$0.004$^{*}$ & $-$0.004$^{*}$ & $-$0.003$^{*}$ \\ 
+%   &  &  &  & (0.002) & (0.002) & (0.002) & (0.002) \\ 
+%   & & & & & & & \\ 
+%  playground &  &  &  & $-$0.029$^{***}$ & $-$0.028$^{***}$ & $-$0.029$^{***}$ & $-$0.022$^{***}$ \\ 
+%   &  &  &  & (0.006) & (0.006) & (0.006) & (0.006) \\ 
+%   & & & & & & & \\ 
+%  nature\_reserve &  &  &  & 0.006 & 0.016 & 0.015 & 0.035 \\ 
+%   &  &  &  & (0.028) & (0.027) & (0.027) & (0.026) \\ 
+%   & & & & & & & \\ 
+%  golf\_course &  &  &  & 0.194$^{***}$ & 0.185$^{***}$ & 0.180$^{***}$ & 0.144$^{***}$ \\ 
+%   &  &  &  & (0.035) & (0.035) & (0.035) & (0.033) \\ 
+%   & & & & & & & \\ 
+%  hotel &  &  &  &  & $-$0.005 & $-$0.004 & $-$0.004 \\ 
+%   &  &  &  &  & (0.004) & (0.004) & (0.004) \\ 
+%   & & & & & & & \\ 
+%  attraction &  &  &  &  & 0.015$^{*}$ & 0.015$^{*}$ & 0.018$^{**}$ \\ 
+%   &  &  &  &  & (0.009) & (0.009) & (0.009) \\ 
+%   & & & & & & & \\ 
+%  museum &  &  &  &  & 0.037 & 0.037 & 0.021 \\ 
+%   &  &  &  &  & (0.029) & (0.029) & (0.028) \\ 
+%   & & & & & & & \\ 
+%  art &  &  &  &  & 0.027 & 0.027 & $-$0.007 \\ 
+%   &  &  &  &  & (0.024) & (0.024) & (0.023) \\ 
+%   & & & & & & & \\ 
+ pub\_restaurant &  &  &  &  & 0.010$^{***}$ & 0.009$^{***}$ & 0.010$^{***}$ \\ 
+  &  &  &  &  & (0.003) & (0.003) & (0.003) \\ 
+  & & & & & & & \\ 
+ cafe &  &  &  &  & 0.005 & 0.005 & 0.003 \\ 
+  &  &  &  &  & (0.006) & (0.006) & (0.005) \\ 
+  & & & & & & & \\ 
+ fast\_food &  &  &  &  & $-$0.026$^{***}$ & $-$0.026$^{***}$ & $-$0.025$^{***}$ \\ 
+  &  &  &  &  & (0.005) & (0.005) & (0.005) \\ 
+  & & & & & & & \\ 
+ school &  &  &  &  &  & 0.010$^{*}$ &  \\ 
+  &  &  &  &  &  & (0.005) &  \\ 
+  & & & & & & & \\ 
+ private\_school &  &  &  &  &  &  & 0.124$^{***}$ \\ 
+  &  &  &  &  &  &  & (0.014) \\ 
+  & & & & & & & \\ 
+ university &  &  &  &  &  & $-$0.0002 & $-$0.002 \\ 
+  &  &  &  &  &  & (0.006) & (0.006) \\ 
+  & & & & & & & \\ 
+ Controls: Land Use &  & YES & YES  & YES  & YES &  YES & YES \\ 
+  &  &  &  &  &  &  & \\ 
+ Controls: Nature &  &  &  YES & YES  & YES & YES & YES \\ 
+  &  &  &  &  &  &  &  \\ 
+ Controls: Tourism &  &  &  & YES & YES & YES & YES  \\ 
+  &  &  &  &  &  &  & \\ 
+ Constant & 14.330$^{***}$ & 14.300$^{***}$ & 14.230$^{***}$ & 14.260$^{***}$ & 14.220$^{***}$ & 14.200$^{***}$ & 14.140$^{***}$ \\ 
+  & (0.035) & (0.036) & (0.037) & (0.037) & (0.038) & (0.039) & (0.037) \\ 
+  & & & & & & & \\ 
 \hline \\[-1.8ex] 
-Observations & 951 & 951 & 951 & 951 & 951 & 951 \\ 
-R$^{2}$ & 0.543 & 0.565 & 0.635 & 0.654 & 0.656 & 0.680 \\ 
-Adjusted R$^{2}$ & 0.543 & 0.563 & 0.629 & 0.646 & 0.647 & 0.672 \\ 
+Observations & 951 & 951 & 951 & 951 & 951 & 951 & 951 \\ 
+R$^{2}$ & 0.543 & 0.570 & 0.596 & 0.631 & 0.652 & 0.653 & 0.680 \\ 
+Adjusted R$^{2}$ & 0.543 & 0.568 & 0.592 & 0.625 & 0.644 & 0.644 & 0.671 \\ 
 \hline 
 \hline \\[-1.8ex] 
-\textit{Note: Control variables include nature \& tourist amenities}  & \multicolumn{6}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\textit{Note:}  & \multicolumn{7}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular}
+\end{table}
+
+\begin{table}[H] \centering 
+  \caption{OLS: Supermarket Effects} 
+  \label{} 
+\small 
+\begin{tabular}{@{\extracolsep{5pt}} ccccccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & waitrose & ms & sainsburys & tesco & iceland & morrisons & coop & lidl & asda & aldi \\ 
+\hline \\[-1.8ex] 
+Estimate & $0.052$ & $0.060$ & $0.032$ & $-0.011$ & $-0.056$ & $-0.028$ & $-0.116$ & $-0.102$ & $-0.061$ & $-0.085$ \\ 
+Std. Error & $0.030$ & $0.043$ & $0.038$ & $0.015$ & $0.031$ & $0.033$ & $0.085$ & $0.031$ & $0.043$ & $0.055$ \\ 
+t-value & $1.705$ & $1.408$ & $0.826$ & $-0.741$ & $-1.812$ & $-0.848$ & $-1.368$ & $-3.281$ & $-1.436$ & $-1.536$ \\ 
+Pr(\textgreater \textbar t\textbar ) & $0.088$ & $0.159$ & $0.409$ & $0.459$ & $0.070$ & $0.397$ & $0.172$ & $0.001$ & $0.151$ & $0.125$ \\ 
+\hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
 
+
 \subsection{Causal Analysis of Supermarket Amenities}
-retail area median (more than 5 multipolygons) \\
-random oversampling \\
-    => imbalanced dataset (correlation difficult to establish) \\
-    
-supermarket high (corr -0.4) \\
-supermarket low (corr 0.7) \\
-
-exclusion condition \\ 
-    => corr resid -0.08 \\
     
 
-\begin{table}[H] \centering 
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Wed, Mar 27, 2019 - 04:24:52
+\begin{table}[!htbp] \centering 
   \caption{Instrumental Variables} 
   \label{} 
 \begin{tabular}{@{\extracolsep{5pt}}lcc} 
@@ -388,99 +426,94 @@ exclusion condition \\
  & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
 \cline{2-3} 
 \\[-1.8ex] & \multicolumn{2}{c}{log\_price} \\ 
-\\[-1.8ex] & \textit{OLS} & \textit{IV} \\
+\\[-1.8ex] & \textit{OLS} & \textit{IV} \\ 
 \\[-1.8ex] & (1) & (2)\\ 
 \hline \\[-1.8ex] 
- dist\_miles\_log & $-$0.438$^{***}$ & $-$0.360$^{***}$ \\ 
-  & (0.015) & (0.047) \\ 
+ dist\_miles\_log & $-$0.440$^{***}$ & $-$0.354$^{***}$ \\ 
+  & (0.015) & (0.048) \\ 
   & & \\ 
-supermarket\_high
-  & 0.051$^{**}$ & 0.836$^{**}$ \\ 
-  (Instrument: non-residential planning permits) & (0.022) & (0.384) \\ 
+ supermarkets\_high & 0.050$^{***}$ & 0.848$^{**}$ \\ 
+  (instrument: planning leniency) & (0.018) & (0.375) \\ 
   & & \\ 
- supermarket\_low & $-$0.109$^{***}$ & $-$0.950$^{*}$ \\ 
-  (Instrument: mean retail area) & (0.027) & (0.568) \\ 
-  & & \\
-%  residential & 0.008$^{***}$ & 0.007$^{**}$ \\ 
-%   & (0.002) & (0.003) \\ 
-%   & & \\ 
-%  retail & 0.0002 & 0.003 \\ 
-%   & (0.002) & (0.004) \\ 
-%   & & \\ 
-%  industrial & $-$0.024$^{***}$ & $-$0.016 \\ 
-%   & (0.005) & (0.012) \\ 
-%   & & \\ 
-%  construction & 0.006 & $-$0.025 \\ 
-%   & (0.005) & (0.018) \\ 
-%   & & \\ 
-%  commercial & $-$0.013$^{**}$ & 0.001 \\ 
-%   & (0.006) & (0.013) \\ 
-%   & & \\ 
-%  garden & 0.0004 & $-$0.0003 \\ 
-%   & (0.001) & (0.001) \\ 
-%   & & \\ 
-%  pitch & 0.003$^{***}$ & 0.007$^{**}$ \\ 
-%   & (0.001) & (0.003) \\ 
-%   & & \\ 
-%  park & $-$0.003 & $-$0.007 \\ 
-%   & (0.002) & (0.004) \\ 
-%   & & \\ 
-%  playground & $-$0.022$^{***}$ & $-$0.025$^{**}$ \\ 
-%   & (0.006) & (0.011) \\ 
-%   & & \\ 
-%  nature\_reserve & 0.036 & 0.010 \\ 
-%   & (0.026) & (0.050) \\ 
-%   & & \\ 
- golf\_course & 0.147$^{***}$ & 0.089 \\ 
-  & (0.033) & (0.070) \\ 
+ supermarkets\_middle & $-$0.021$^{*}$ & $-$0.041 \\ 
+   & (0.012) & (0.033) \\ 
   & & \\ 
-%  hotel & $-$0.002 & $-$0.002 \\ 
-%   & (0.004) & (0.007) \\ 
-%   & & \\ 
-%  attraction & 0.020$^{**}$ & $-$0.010 \\ 
-%   & (0.009) & (0.022) \\ 
-%   & & \\ 
-%  museum & 0.040 & 0.045 \\ 
-%   & (0.028) & (0.051) \\ 
-%   & & \\ 
-%  art & 0.002 & $-$0.051 \\ 
-%   & (0.023) & (0.050) \\ 
-%   & & \\ 
- restaurant & 0.006$^{**}$ & 0.007 \\ 
-  & (0.002) & (0.004) \\ 
+ supermarkets\_low & $-$0.089$^{***}$ & $-$0.643$^{**}$ \\ 
+  (instrument: retail area size) & (0.022) & (0.323) \\ 
   & & \\ 
- pub & 0.004 & $-$0.003 \\ 
-  & (0.005) & (0.011) \\ 
+ Constant & 14.140$^{***}$ & 13.920$^{***}$ \\ 
+  & (0.037) & (0.127) \\ 
   & & \\ 
- cafe & 0.004 & $-$0.009 \\ 
-  & (0.005) & (0.013) \\ 
-  & & \\ 
- fast\_food & $-$0.021$^{***}$ & $-$0.004 \\ 
-  & (0.004) & (0.013) \\ 
-  & & \\ 
- private\_school & 0.120$^{***}$ & 0.048 \\ 
-  & (0.014) & (0.043) \\ 
-  & & \\ 
- university & 0.002 & 0.011 \\ 
-  & (0.006) & (0.013) \\ 
-  & & \\
- Constant & 14.131$^{***}$ & 13.974$^{***}$ \\ 
-  & (0.038) & (0.107) \\ 
-  & & \\
- Controls: land use, nature \& tourist amenities & YES &   YES \\   &  &   \\ &  &  \\
 \hline \\[-1.8ex] 
-Weak instruments (supermarket\_high) &  & 0.000 \\ 
-Weak instruments (supermarket\_low) &  & 0.001 \\ 
-Wu-Hausman &  & 0.001  \\ 
+Weak instruments (supermarkets\_high) &  & 0.0011*** \\ 
+Weak instruments (supermarkets\_low) &  & 0.0000*** \\ 
+Wu-Hausman &  & 0.0002*** \\ 
 Observations & 951 & 951 \\ 
-R$^{2}$ & 0.680 & $-$0.070 \\ 
-Adjusted R$^{2}$ & 0.672 & $-$0.097 \\ 
-Residual Std. Error (df = 926) & 0.258 & 0.472 \\ 
-\hline \\[-1.8ex]
-\textit{Note: $R^{2} = 1- \frac{RSS}{TSS} < 0$ with endogeneity for IV}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+R$^{2}$ & 0.679 & $-$0.135 \\ 
+Adjusted R$^{2}$ & 0.671 & $-$0.165 \\ 
+Residual Std. Error (df = 926) & 0.258 & 0.486 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note: All other controls are included}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
 \end{table} 
-    
+
+Wooldridge 235
+log hourly wage equation
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Wed, Mar 27, 2019 - 06:27:15
+\begin{table}[H] \centering 
+  \caption{First Difference Estimator} 
+  \label{} 
+\small 
+\begin{tabular}{@{\extracolsep{-10pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & lp\_d \\ 
+\hline \\[-1.8ex] 
+ sh\_d & $-$0.022$^{*}$ \\ 
+  & (0.013) \\ 
+  & \\ 
+ sm\_d & $-$0.016$^{*}$ \\ 
+  & (0.009) \\ 
+  & \\ 
+ sl\_d & 0.004 \\ 
+  & (0.014) \\ 
+  & \\ 
+ Constant & 0.381$^{***}$ \\ 
+  & (0.005) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 951 \\ 
+R$^{2}$ & 0.007 \\ 
+Adjusted R$^{2}$ & 0.004 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Wed, Mar 27, 2019 - 06:27:46
+\begin{table}[H] \centering 
+  \caption{Individual FD Effects} 
+  \label{} 
+\small 
+\begin{tabular}{@{\extracolsep{-10pt}} ccccccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & waitrose\_d & ms\_d & sainsburys\_d & tesco\_d & iceland\_d & morrisons\_d & coop\_d & lidl\_d & asda\_d & aldi\_d \\ 
+\hline \\[-1.8ex] 
+Estimate & $-0.095$ & $-0.019$ & $0.032$ & $-0.021$ & $0.022$ & $-0.038$ & $0.015$ & $-0.022$ & $0.028$ & $0.005$ \\ 
+Std. Error & $0.022$ & $0.026$ & $0.023$ & $0.011$ & $0.020$ & $0.026$ & $0.060$ & $0.021$ & $0.028$ & $0.033$ \\ 
+t-value & $-4.292$ & $-0.718$ & $1.419$ & $-1.883$ & $1.066$ & $-1.424$ & $0.243$ & $-1.023$ & $1.004$ & $0.158$ \\ 
+Pr(\textgreater \textbar t\textbar ) & $0.00002$ & $0.473$ & $0.156$ & $0.060$ & $0.287$ & $0.155$ & $0.808$ & $0.306$ & $0.315$ & $0.875$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
     
 \section{Discussion} \label{section:discussion}
 
@@ -488,6 +521,7 @@ Residual Std. Error (df = 926) & 0.258 & 0.472 \\
 \subsection{Limitations and Future Work}
 
 \section{Conclusion} \label{section:conclusion}
+
 
 \newpage
 \nocite{*}
