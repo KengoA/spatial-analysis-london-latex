@@ -250,7 +250,7 @@ dist\_uber &  714.0 &  2151.82 &  815.78 &  183.22 &  1604.15 &  2165.57 &  2730
   \label{fig:log_log}
 \end{figure}
 
-\subsection{Local Amenities from OpenStreetMap}
+\subsection{Local Amenities from OpenStreetMap} \label{subsection:variable}
 This section describes the most important novelty of this paper, that is the construction of variables for neighbourhood amenities from OpenStreetMap to characterise modern urban structures. This is followed by introduction of variables used in empirical models in Section \ref{section:model} with reference to existing research on their effects on housing prices. In the hedonic pricing model, local amenities correspond to the vector $z$ that characterises the product, which is the log average housing price of a given MSOA. Among a significant amount of map objects in each area, I utilise \texttt{points} and \texttt{polygons} to construct a variable for each amenity by counting the number of a given entity present in the MSOA. For instance, to construct a variable \texttt{tesco} for a supermarket amenity in the \texttt{City of London 001}, I count the number of occurrences of its standardised name \texttt{Tesco Express, Tesco, Tesco Metro} from each map object within the boundary of \texttt{City of London 001}. To the best of my knowledge, I am the first to utilise these OpenStreetMap objects to represent local amenities as characteristics for housing prices. As I demonstrate in the empirical analysis, they serve as useful approximations for neighbourhood characteristics in terms of land use, nature amenities, and most importantly, consumption amenities that include supermarkets. Nonetheless, this method is not without limitations. First, it implicitly assumes homogeneity within the same class such as \texttt{sainsburys} and \texttt{cafe}, while different establishments might have differing characteristics in reality. Second, there might be a difference between the time an entity, say, a Tesco store, opened and the time it was actually registered as a map object, which is potentially problematic for time series analysis such as difference-in-difference estimators. Potential limitations and their consequences are discussed in detail in Section \ref{subsection:limitations} reflecting on the empirical analysis of the hedonic pricing models. 
 
 As the main interest of this paper, I first construct supermarket amenities. The same supermarket chains are chosen as the report by Lloyds Bank (2016) to investigate their individual effects in Greater London. These are, with variable names in brackets, Waitrose (\texttt{waitrose}), Sainsbury's (\texttt{sainsburys}), Marks and Spencer (\texttt{ms}), Tesco (\texttt{tesco}), Iceland (\texttt{iceland}), Coop (\texttt{coop}), morrisons (\texttt{morrisons}), Asda (\texttt{asda}), Lidl (\texttt{lidl}), and Aldi (\texttt{aldi}). To ensure enough variation and understand a larger trend, this is abstracted to three different categories based on price levels and premium reported in Lloyds (2016), where \texttt{supermarkets\_high} = (\texttt{waitrose, sainsburys, ms}), \texttt{supermarkets\_middle} = (\texttt{tesco, morrisons, coop, iceland}), and \texttt{supermarkets\_low} = (\texttt{asda, lidl, aldi}). Individual effects will also be reported. While OpenStreetMap has a good coverage in terms of the number of establishments for most of these chains, some classes are disproportionately represented such as \texttt{coop} where there are only 13 stores detected across Greater London. Implications of overrepresentation and underrepresentation are discussed in Section \ref{subsubsection:result:hedonic}. These variables alone cannot explain the marginal effects of supermarket amenities as housing price is a function of a number of other characteristics, and empirical models will suffer severely from omitted variable bias. Therefore, the rest of this section outlines key control variables for housing prices that are used in empirical models in Section \ref{section:model}, in addition to the distance measures described above.
@@ -302,12 +302,13 @@ with each of ($\beta, \lambda, \gamma, \theta, \phi, \mu)$ representing a vector
 
 \subsection{Results}
 \subsubsection{Monocentric City Model}
+Table \ref{table:monocentric} compares two distance measures as a proxy for employment accessibility in the monocentric city model, using univariate OLS regression. As there is a nontrivial number of missing values for the pairwise Uber distance between the CBD and some areas with $N$ = 751 compared to 951 MSOAs with valid housing price data, the corresponding MSOAs are dropped from model (1) with distance in miles such that the estimated coefficients are directly comparable. Constants 14.299 in model (1) and 18.197 in model (2) are estimated housing prices in the CBD when the distance is equal to 0. Both models yield negative coefficients for distance that are statistically significant at the 1\% level, which is in line with the theoretical result from Section \ref{subsection:monocentric} where housing prices decrease as distance from the CBD increases. To examine the difference between the two estimated coefficients $\tau_1$ and $\tau_2$ in two different models, I follow Clogg et al. (1995) and calculate that $Z = \frac{\tau_1 - \tau_2}{\sqrt{(SE\tau_1)^2 + (SE\tau_2)^2}}  = \frac{-0.583 - (-0.649)}{\sqrt{0.021)^2 + (0.025)^2}} = 2.021$, with $P(Z > 2.021) = 0.022$  which is statistically significant at the 5\% level. A log-log linear relationship allows interpretations in percentage terms, where a 1\% increase in distance in miles is associated with a a 0.583\% lower housing price, and a 1\% increase in morning commuting time is associated with a 0.649\% lower housing price.  A steeper curve with Uber distance implies that commuting cost in terms of travel times is associated with a deeper discount to the housing prices compared to the discount associated with geometric distance. While it appears sensible that actual commuting time has a higher impact compared to a rather raw distance measure of miles, model (1) explains a higher proportion of variance with Adjusted-$R^2$ of 0.525, in contrast to 0.477 for model (2). While the discrepancy in $R^2$ is not large, the higher explanatory power of model (1) potentially stems from the fact that morning travel time on the road approximated by Uber Movement data does not consider different types of transport commuters use. Well-developed underground and railway networks with good access to the periphery areas, for instance, are a differentiating characteristic of London compared to large American cities, which consist of combined 23\% of all journeys in Greater London by residents (Transport for London, 2016). The congestion charge in the inner city might also be a reason why people might shy away from commuting on the road (Transport for London, 2019). Moving forward to the hedonic pricing model with additional control variables and supermarket amenities, I will employ \texttt{dist\_miles\_log} as the main proxy for distance given the higher adjusted-$R^2$ and the completeness of the dataset for the geometric distance measure.
 
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: Wed, Mar 27, 2019 - 03:21:58
-\begin{table}[H] \centering 
+\begin{table}[H]\ \centering 
   \caption{Commuting cost comparison} 
-  \label{} 
+  \label{table:monocentric} 
 \small 
 \begin{tabular}{@{\extracolsep{-10pt}}lcc} 
 \\[-1.8ex]\hline 
@@ -334,19 +335,39 @@ Adjusted R$^{2}$ & 0.525 & 0.477 \\
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
-\end{table} 
-
-I follow Clogg et al. (1995) to examine the difference between the two coefficients $\tau_1$ and $\tau_2$ in two different models, and calculate that $Z = \frac{\tau_1 - \tau_2}{\sqrt{(SE\tau_1)^2 + (SE\tau_2)^2}}  = \frac{-0.583 - (-0.649)}{\sqrt{0.021)^2 + (0.025)^2}} = 2.021$, with $P(Z > 2.021) = 0.022$  which is statistically significant at the 5\% level. 
-
-
+\end{table}
 
 \subsubsection{Hedonic Pricing Model} \label{subsubsection:result:hedonic}
+In Section \ref{subsection:monocentricity}, I argued that the hedonic pricing model extends the simple monocentric city model by incorporating heterogeneous amenities present in each neighbourhood. Table \ref{table:hedonic} follows this empirically with regression models where control variables are gradually added by different categories specified in Section \ref{subsection:specifications}. Model (1) corresponds to the univariate regression with distance in miles from the previous analysis of the monocentric city model . Model (2) first introduces supermarket variables at the aggregate level with three different price levels, and yield a preliminary result that an increase in the number of supermarket establishments in the MSOA is associated with a 9.9\% increase in housing prices for high-end supermarkets (Waitrose, Sainsbury's, and Marks and Spencer), a 2.4\% decrease for mid-level chains (Tesco, Morrisons, Coop, and Iceland), and a rather strong 14.3\% decrease for low-end discount stores (lidl, Asda and Aldi). This model, however, is subject to omitted variable bias, and models (3)-(7) attempt to correct this bias by introducing control variables that are shown in the literature to affect housing prices through different channels. \\\\
+In terms of explained variance, the inclusion of control variables contributes to a similar extent with adjusted-$R^2$ increasing from 0.568 for model (2) to 0.592 for model (3) with land use controls, to 0.625 for model (4) with nature amenity controls, and to 0.644 for model (5) with tourism amenity controls. The complete regression table for model (7) is available in Appendix as Table \ref{table:complete}. Signs of coefficients are mostly in line with the existing studies introduced in Section \ref{section:variables} as part of variable construction. A tourism amenity \texttt{attraction} has a positive coefficient of 0.018 in model (7) that is statistically significant at the 10\% level, which implies that an increase in the number of tourist attractions is correlated with a 1.8\% higher housing prices. This is somewhat in line with Biagi et al. (2015)'s result from Italian urban areas where a 1\% increase in tourism index is associated with 1\% higher housing prices in the neighbourhood, although differences in the scope of a neighbourhood and the nature of price distribution should be taken into account. \\\\
+Land use variable \texttt{industrial} and \texttt{commercial}, on the other hand, have negative coefficients of -0.022 and -0.018 both statistically significant at the 1\% level. It should be noted that \texttt{commercial} refers to large-scale services such as laboratories, business parks, warehouses and car repair stations, which is distinguished from \texttt{retail} tag which primarily contains food and drink establishments (OpenStreetMap, n.d.). While the land use variation illustrated in Figure \ref{fig:landuse} qualitatively shows that the housing price increases nearby manufacturing and commercial centres, these variables appear to predict otherwise. One potential explanation for this is the decreasing number of employment opportunities in the manufacturing industry which has gone through automation for the past decades, with employment in the industrial sector fell from 6.7 million in 1978 to 2.6 million in 2013 (Financial Tmes, 2018). With lower demand from workers as employment centres, factories and commercial centres might be more strongly linked to negative externalities in the form of air pollution, noise, congestion, and undermined aesthetic attributes described in Orford (1998), that likely decrease housing prices in the neighbourhood.\\\\
+Nature controls highlight interesting suburban amenities and potential problems in the variable construction method. Table \ref{table:complete} shows that parks and playgrounds are negatively associated with housing prices, with coefficients of -0.003 (statistically significant at the 10\% level) and -0.022 (statistically significant at the 1\% level), respectively. This is in contrast to findings by Gibbons et al. (2014) where green spaces provide value in terms of housing prices. As suggested in \ref{subsection:variable}, this partially stems from the heterogeneity in nature amenities in terms of size, that distorts their representation with the counting method used throughout this paper. I argue that this is also because of the complexity of nature amenities. For instance, a playground in the city centre will likely provide more utility to residents than a playground in sparsely populated suburbs. Additionally, large parks and playgrounds often 
+
+There is negative bias towards areas with more playgrounds and parks 
+Interestingly, \texttt{golf\_course} has a strong positive coefficient of 0.144 that is statistically significant at the 1\% level. 
+
+issue of opportunity cost spatial availability 
+while this is 
+
+Model (6) introduces education variables from OpenStreetMap (see Table \ref{table:hedonic}), only to add limited explanatory power to model (5) with a coefficient of 0.010 for \texttt{school}. Alternative variable for education \texttt{private\_school} compiled in Section \ref{subsection:school}, on the other hand, has a much more significant effect on housing prices with a coefficient of 0.124 in model (7), statistically significant at the 1\% level. This verifies findings by Niu and Liu (2017) on the importance of education, and the housing premium of 12\% is more or less comparable to figures by Department for Education (2017) from their study in England with the premium of 8\% for primary schools in the top 10\% and 6.4\% for secondary schools. Importantly, this variable particularly identifies affluent areas in the suburbs where private schools are located, contributing to increased explained variance in terms of adjusted-$R^2$ from 0.644 in model (5) to 0.671 in model (7).
+
+
+
+
+
+
+
+
+After controlling for other amenities, coefficients associated with supermarkets are lower in absolute values on both ends of the price spectrum, with 0.050 for high-end supermarkets and -0.088 for low-end supermarkets in model (7), while maintaining the statistical significance at the 1\% level. Mid-level supermarkets appear to show a mixed 
+
+
+The distance measure \texttt{dist\_mies\_log} remains statistically significant at the 1\% level throughout all the models, while the magnitude of its coefficient is somewhat mitigated by other explanatory variables with -0.440 in model (7) in comparison to -0.513 in the univariate case.  
 
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: Wed, Mar 27, 2019 - 03:45:07
 \begin{table}[H] \centering 
   \caption{Cross-sectional OLS} 
-  \label{} 
+  \label{table:hedonic} 
 \small 
 \begin{tabular}{@{\extracolsep{-10pt}}lccccccc} 
 \\[-1.8ex]\hline 
@@ -431,11 +452,11 @@ I follow Clogg et al. (1995) to examine the difference between the two coefficie
  university &  &  &  &  &  & $-$0.0002 & $-$0.002 \\ 
   &  &  &  &  &  & (0.006) & (0.006) \\ 
   & & & & & & & \\ 
- Controls: Land Use &  & YES & YES  & YES  & YES &  YES & YES \\ 
+ Controls: Land Use &  &  & YES  & YES  & YES &  YES & YES \\ 
   &  &  &  &  &  &  & \\ 
- Controls: Nature &  &  &  YES & YES  & YES & YES & YES \\ 
+ Controls: Nature &  &  &   & YES  & YES & YES & YES \\ 
   &  &  &  &  &  &  &  \\ 
- Controls: Tourism &  &  &  & YES & YES & YES & YES  \\ 
+ Controls: Tourism &  &  &  &  & YES & YES & YES  \\ 
   &  &  &  &  &  &  & \\ 
  Constant & 14.330$^{***}$ & 14.300$^{***}$ & 14.230$^{***}$ & 14.260$^{***}$ & 14.220$^{***}$ & 14.200$^{***}$ & 14.140$^{***}$ \\ 
   & (0.035) & (0.036) & (0.037) & (0.037) & (0.038) & (0.039) & (0.037) \\ 
@@ -450,9 +471,9 @@ Adjusted R$^{2}$ & 0.543 & 0.568 & 0.592 & 0.625 & 0.644 & 0.644 & 0.671 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[H] \centering 
+\begin{table}[H]
   \caption{Individual Supermarket Effects} 
-  \label{} 
+  \label{table:ols:individual} 
 \small 
 \begin{tabular}{@{\extracolsep{5pt}} ccccccccccc} 
 \\[-1.8ex]\hline 
@@ -604,5 +625,84 @@ converted stores?
 \renewcommand{\refname}{\textbf{Bibliography}}
 \bibliographystyle{agsm}  
 \bibliography{bibliography.bib}
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Sun, Mar 31, 2019 - 06:10:02
+
+\newpage
+\appendix
+\addtocontents{toc}{\setcounter{tocdepth}{-1}}
+\section{Complete OLS table}
+\begin{table}[H] \centering 
+  \caption{OLS: Neighbourhood Amenities} 
+  \label{table:complete} 
+\small 
+\begin{tabular}{@{\extracolsep{-10pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & log\_price \\ 
+\hline \\[-1.8ex] 
+ dist\_miles\_log & $-$0.440$^{***}$ (0.015) \\ 
+  & \\ 
+ supermarkets\_high & 0.050$^{***}$ (0.018) \\ 
+  & \\ 
+ supermarkets\_middle & $-$0.023$^{*}$ (0.012) \\ 
+  & \\ 
+ supermarkets\_low & $-$0.088$^{***}$ (0.022) \\ 
+  & \\ 
+ residential & 0.007$^{***}$ (0.002) \\ 
+  & \\ 
+ retail & 0.001 (0.002) \\ 
+  & \\ 
+ industrial & $-$0.022$^{***}$ (0.005) \\ 
+  & \\ 
+ construction & 0.008 (0.005) \\ 
+  & \\ 
+ commercial & $-$0.018$^{***}$ (0.006) \\ 
+  & \\ 
+ garden & 0.0002 (0.001) \\ 
+  & \\ 
+ pitch & 0.003$^{**}$ (0.001) \\ 
+  & \\ 
+ park & $-$0.003$^{*}$ (0.002) \\ 
+  & \\ 
+ playground & $-$0.022$^{***}$ (0.006) \\ 
+  & \\ 
+ nature\_reserve & 0.035 (0.026) \\ 
+  & \\ 
+ golf\_course & 0.144$^{***}$ (0.033) \\ 
+  & \\ 
+ hotel & $-$0.004 (0.004) \\ 
+  & \\ 
+ attraction & 0.018$^{**}$ (0.009) \\ 
+  & \\ 
+ museum & 0.021 (0.028) \\ 
+  & \\ 
+ art & $-$0.007 (0.023) \\ 
+  & \\ 
+ pub\_restaurant & 0.010$^{***}$ (0.003) \\ 
+  & \\ 
+ cafe & 0.003 (0.005) \\ 
+  & \\ 
+ fast\_food & $-$0.025$^{***}$ (0.005) \\ 
+  & \\ 
+ private\_school & 0.124$^{***}$ (0.014) \\ 
+  & \\ 
+ university & $-$0.002 (0.006) \\ 
+  & \\ 
+ Constant & 14.140$^{***}$ (0.037) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 951 \\ 
+R$^{2}$ & 0.680 \\ 
+Adjusted R$^{2}$ & 0.671 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note: SE in parenthesis}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
 
 \end{document}
