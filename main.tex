@@ -275,24 +275,24 @@ Finally, as studies by Niu and Liu (2017) and Department for Education (2017) sh
 \section{Empirical Analysis} \label{section:model}
 Given the two theoretical frameworks presented in Section \ref{section:lit} and variables constructed in Section \ref{section:variables}, this section first describes empirical strategies using cross-sectional analysis and present the preliminary results. The causal effects of supermarket amenities are then investigated more thoroughly using instrumental variables and first difference estimator.
 \subsection{Model Specifications} \label{subsection:specifications}
-First of all, the simplest case of the monocentric city model is tested using two distance measures separately. In Section \ref{subsection:monocentric}, I formulated that housing price is a linear function of distance to the CBD, that is, $P_H(d) = \hat{r} - \tau d$, where $\hat{r}$ denotes the rent in the CBD. Considering the log-log linear relationship between distance and housing prices, I run the two following OLS regressions using data from 2018, and estimate two different coefficients for the magnitude of commuting cost $\tau > 0$ for each distance; $\tau_1$ for geometric distance converted to miles and $\tau_2$ for Uber distance approximated by average morning commuting time, such that
+First of all, the simplest case of the monocentric city model is tested using two distance measures separately. In Section \ref{subsection:monocentric}, I formulated that housing price is a linear function of distance to the CBD, that is, $P_H(d) = \overline{r} - \tau d$, where $\overline{r}$ denotes the rent in the CBD. Considering the log-log linear relationship between distance and housing prices, I run the two following OLS regressions using data from 2018, and estimate two different coefficients for the magnitude of commuting cost $\tau > 0$ for each distance; $\tau_1$ for geometric distance converted to miles and $\tau_2$ for Uber distance approximated by average morning commuting time, such that
 
 \begin{gather*}
-ln(P_i) = \hat{r} - \tau_1 ln(dist\_miles_i) + \epsilon_i \\
-ln(P_i) = \hat{r} - \tau_2 ln(dist\_uber_i) + \epsilon_i
+ln(P_i) = \alpha - \tau_1 ln(dist\_miles_i) + \epsilon_i \\
+ln(P_i) = \alpha - \tau_2 ln(dist\_uber_i) + \epsilon_i
 \end{gather*}
 \\
-where $P_i$ is the mean housing price for a given MSOA $i$, and $\hat{r}$ corresponds to to the coefficient for the constant term in univariate regressions. Following the analysis on these two specifications, I proceed by adopting one distance measure and setting up a hedonic pricing model to investigate the effects of local amenities introduced in Section \ref{section:variables}. The key explanatory variables here are a vector of supermarkets $\boldsymbol{x}$, which contains three variables aggregated by price levels. Individual effects are also reported by supermarket chains. Adding the local amenities data extracted from 2018 OpenStreetMap data and private school data, the hedonic pricing model is specified as:
+where $P_i$ is the mean housing price for a given MSOA $i$, and $\alpha$ is the coefficient for the constant term that corresponds to the rent in CBD $\overline{r}$ in Section \ref{subsection:monocentric}. Following the analysis on these two specifications, I proceed by adopting one distance measure and setting up a hedonic pricing model to investigate the effects of local amenities introduced in Section \ref{section:variables}. The key explanatory variables here are a vector of supermarkets $\boldsymbol{x}$, which contains three variables aggregated by price levels. Individual effects are also reported by supermarket chains. Adding the local amenities data extracted from 2018 OpenStreetMap data and private school data, the hedonic pricing model is specified as:
 
 \begin{gather*}
-ln(P_i) = \hat{r} - \tau ln(dist_i) + \boldsymbol{x_i^{T}} \beta + \boldsymbol{land_i^{T}}\lambda + \boldsymbol{nature_i^{T}} \gamma + \boldsymbol{tourism_i^{T}} \theta + \boldsymbol{food_i^{T}} \phi + \boldsymbol{edu_i^{T}} \mu + \epsilon_i \\
+ln(P_i) = \alpha - \tau ln(dist_i) + \boldsymbol{x_i^{T}} \beta + \boldsymbol{land_i^{T}}\lambda + \boldsymbol{nature_i^{T}} \gamma + \boldsymbol{tourism_i^{T}} \theta + \boldsymbol{food_i^{T}} \phi + \boldsymbol{edu_i^{T}} \mu + \epsilon_i \\
 \end{gather*}
 such that
 \begin{gather*}
 \boldsymbol{x} = (supermarkets\_high, supermarkets\_middle, supermarkets\_low) \\
 \boldsymbol{land} = (residential, retail, industrial, construction, commercial) \\
 \boldsymbol{nature} = (garden, pitch, park, playground, nature\_reserve, golf\_course) \\
-\boldsymbol{tourism} = (hotel, atraction, museum, art) \\
+\boldsymbol{tourism} = (hotel, attraction, museum, art) \\
 \boldsymbol{food} = (pub\_restaurant, cafe, fast\_food) \\ 
 \boldsymbol{edu} = (school, private\_school, university) \\ 
 \end{gather*}
@@ -343,7 +343,7 @@ Land use variable \texttt{industrial} and \texttt{commercial}, on the other hand
 Nature controls highlight interesting suburban amenities and potential problems in the variable construction method. Table \ref{table:complete} shows that \texttt{golf\_course} has a strong positive coefficient of 0.144 that is statistically significant at the 1\% level. Importantly, this variable  identifies suburban amenities associated wiht affluent areas where gold courses are located. On the other hand, \texttt{parks} and \texttt{playgrounds} are shown to be negatively associated with housing prices, with coefficients of -0.003 (statistically significant at the 10\% level) and -0.022 (statistically significant at the 1\% level), respectively. This is in contrast to findings by Gibbons et al. (2014) where green spaces provide value in terms of housing prices. As suggested in \ref{subsection:variable}, this partially stems from the heterogeneity in nature amenities in terms of size, that distorts their representation with the counting method used throughout this paper. I argue that this is also because of the complexity of nature amenities. For instance, a playground in the city centre will likely provide more utility to residents than a playground in sparsely populated suburbs. Another factor to consider is that there is spatial competition between certain entities and amenities within a given area. While the hedonic pricing model implicitly assumes that the product can be decomposed to independent qualities that customers assign values to, this is often not the case in the case of housing prices due to spatial constraint. This issue is especially severe in cases where a certain entity requires more space than others, such as parks and playgrounds. While there are studies such as Niu et al. (2018) that investigate the spatial distribution of parks and their accessibility and efficiency as an urban amenity, this is beyond the scope of this paper and will be discussed as part of future work in Section \ref{subsection:limitations}.
 
 Model (6) in  Table \ref{table:hedonic} introduces education variables from OpenStreetMap, only to add limited explanatory power to model (5) with a coefficient of 0.010 for \texttt{school}, significant at the 10\% level. on the other hand, alternative variable for education \texttt{private\_school} compiled in Section \ref{subsection:school} has a much more significant effect on housing prices with a coefficient of 0.124 in model (7), statistically significant at the 1\% level. This verifies findings by Niu and Liu (2017) on the importance of education, and the housing premium of 12\% is more or less comparable to figures by Department for Education (2017) from their study in England with the premium of 8\% for primary schools in the top 10\% and 6.4\% for secondary schools.  This is another example of a strongly positive amenity identified not only in the central but also in the periphery of London, contributing to increased explained variance in terms of adjusted-$R^2$ from 0.644 in model (5) to 0.671 in model (7). \\\\
-After controlling for other amenities, coefficients associated with supermarkets are lower in absolute values on both ends of the price spectrum, with 0.050 for high-end supermarkets and -0.088 for low-end supermarkets in model (7) compared to 0.099 and -0.143 for model (1), while maintaining the statistical significance at the 1\% level. It is noteworthy that controlling for private schools and food and beverage establishments have a rather large impact on the magnitude of these coefficients. Mid-tier supermarkets, on the other hand, appear to show a mixed result in terms of statistical significance, while the coefficient of -0.023 in model (7) is on a par with -0.024 in model (1). To investigate the individual effects, another regression model is run without aggregation of supermarkets by price levels, using the same control variables as model (7). Table \ref{table:ols:individual} shows individual supermarket effects, with the number of stores for each chain across the entirety of Greater London. At point estimates, only supermarkets categorised in \texttt{supermarkets\_high} seem to command a premium with a positive coefficient, though a high standard error of 0.038 for \texttt{sainsburys} cannot leave out the possibility that the effect is zero. Lidl is statistically significant at the 1\% level and has a strong negative coefficient of -0.102, which implies that an additional Lidl store is on average associated with 10\% lower housing prices in the MSOA. Waitrose and iceland are statistically significant at the 10\% level, with coefficients of 0.052 and -0.056. Despite the premium reported by Lloyds (2016) for Iceland at £20,034 that is higher than Coop (£17,904) and Morrisons (£10,558), this negative coefficient indicates that Iceland might be closer to the lower end of the distribution. This is sensible considering that Iceland specialises in frozen food products sold at a discount, which makes their price levels more comparable to discount stores such as Lidl and Aldi. Marks and Spencer, Asda, Aldi and Coop have point estimates similar to aggregate levels, with limited levels of statistical significance with p-values ranging between 10\% and 20\%. Adjusted-$R^2$ for this model is almost identical to model (7) at 0.670, indicating that the model's explanatory power is not necessarily undermined by variable aggregation. 
+After controlling for other amenities, coefficients associated with supermarkets are lower in absolute values on both ends of the price spectrum, with 0.050 for high-end supermarkets and -0.088 for low-end supermarkets in model (7) compared to 0.099 and -0.143 for model (1), while maintaining the statistical significance at the 1\% level. It is noteworthy that controlling for private schools and food and beverage establishments have a rather large impact on the magnitude of these coefficients. Mid-tier supermarkets, on the other hand, appear to show a mixed result in terms of statistical significance, while the coefficient of -0.023 in model (7) is on a par with -0.024 in model (1). To investigate the individual effects, another regression model is run without aggregation of supermarkets by price levels, using the same control variables as model (7). Table \ref{table:ols:individual} shows individual supermarket effects, with the number of stores for each chain across the entirety of Greater London. At point estimates, only supermarkets categorised in \texttt{supermarkets\_high} seem to command a premium with a positive coefficient, though a high standard error of 0.038 for \texttt{sainsburys} cannot leave out the possibility that the effect is zero. Lidl is statistically significant at the 1\% level and has a strong negative coefficient of -0.102, which implies that an additional Lidl store is on average associated with 10\% lower housing prices in the MSOA. Waitrose and iceland are statistically significant at the 10\% level, with coefficients of 0.052 and -0.056. Despite the premium reported by Lloyds (2016) for Iceland at £20,034 that is higher than Coop (£17,904) and Morrisons (£10,558), this negative coefficient indicates that Iceland might be closer to the lower end of the distribution. This is sensible considering that Iceland specialises in frozen food products sold at a discount, which makes their price levels more comparable to discount stores such as Lidl and Aldi. Marks and Spencer, Asda, Aldi and Coop have point estimates similar to aggregate levels, with limited levels of statistical significance with p-values ranging between 10\% and 20\%. Adjusted-$R^2$ for this model is identical to model (7) at 0.671, indicating that the model's explanatory power is not necessarily undermined by variable aggregation. 
 
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: Wed, Mar 27, 2019 - 03:45:07
@@ -473,49 +473,61 @@ Pr(\textgreater \textbar t\textbar ) & $0.088$ & $0.159$ & $0.409$ & $0.459$ & $
 
 \subsection{Causal Analysis of Supermarket Amenities}
 \subsubsection{Instrumental Variable}
-dwdadw
+One of the key shortcomings of cross-sectional analysis is that it only provides correlational evidence. As housing prices are dynamically determined as part of a complex urban structure, simultaneity becomes a major issue in inferring directions of causality. The cross-sectional OLS result in the previous section identified a modest premium of 5\% on housing prices for a high-end supermarket store, while low-end supermarkets are associated with a price discount of 8\%. In this section, I instrument these two variables \texttt{supermarkets\_high} and \texttt{supermarkets\_low}, and discuss the causal links between supermarket amenities and housing prices by running two-stage least squares regressions. First, I will provide intuition and construction methods of two instruments, \texttt{planning} and \texttt{retail\_size\_mean}. Relevance and exclusion conditions of these instruments are examined using weak instrument test and Wu-Hausman test. IV regressions are then run for three different specifications, instrumenting one supermarket category at a time and then both high-end and lowend supermarkets.\\\\
+One common characteristic among low-end supermarkets is that their establishments tend to have relatively large floor spaces, which often come with parking spaces in their suburban locations. This is an indirect consequence of zero waste policies adopted by German retailers including Lidl and Aldi, which display their products in delivery cartons without using additional wrapping or boxing. Lidl UK (2018), for instance, has a site requirement policy for land developers and leasing firms, in which they specify "unit sizes flexible on design and scale between 10,000 and 25,000 sq ft" for their new locations in London. This is considerably larger than a typical Tesco Express store that is limited to 3,000 square feet in size, and its minimum lot size of 10,000 square feet corresponds to a typical size of Tesco Metro store that is in between 7,000 and 15,000 square feet (Vasques-Nicholson, 2016). Based on this observation, I construct a variable \texttt{retail\_size\_mean} from OpenStreetMap that approximates the mean lot size of retailers in each MSOA. This value is calculated based on the geometry of polygons which have \texttt{retail} under the \texttt{building} key in map objects. Retails store sizes are expected to be positively correlated to the number of low-end stores, while the error term $\epsilon$ of model (7) in OLS regressions should be uncorrelated conditional on the other variables such as distance.
+
+Partially related to the store structures described above, I instrument high-end supermarkets by constructing a variable that approximates planning leniency at the borough level. The basic rationale is that the high-end supermarkets are inclined to be scattered around more densely populated areas with good pedestrian access. In the case of London, this usually entails renovation of existing buildings or land redevelopment. Hawkes (2010) documents that Tesco and Sainsbur's are the top two supermarket chains acquiring planning approvals from local authorities in the UK, with 392 and 111 stores accepted over the course of two years up to 2010. To establish a measure for planning leniency, I utilise planning permissions data available from Greater London Authority (2017) via London Development Database, and count the number of permissions issued by each borough from fiscal years 2014 to 2018. Areas with a higher number of planning permissions are expected to have more small-scale, high-end stores such as Waitrose and Marks and Spencer. Since planning permissions are rather bureaucratically issued by local authorities, this is expected to be exogenous to the housing prices.
+
+Table \ref{table:iv} shows three specifications of IV models focusing on supermarkets. Model (1) corresponds to model (7) in OLS, with all control variables included across all specifications. Adjusted-$R{^2}$ is omitted from IV as it does not give natural interpretations, and robust standard errors are reported in brackets. Models (2) and (3) instrument high-end and low-end supermarkets individually, and model (4) uses both instruments to infer IV estimates for both variables at the same time. For relevance, weak instrument test is conducted against the null that the instrument has a weak first stage, and p-values for rejecting this null are reported in the table. Wu-Hausman test is used to test the exclusion restriction. From models (2) and (3), the relevance condition seems to hold for both instruments with the null hypothesis of weak instruments being rejected at the 5\% level, though exclusion condition cannot be rejected for instrument \texttt{retail\_store\_size} with p-value of 0.1546. Nonetheless, in model (4) where both \texttt{supermarkets\_high} and \texttt{supermarkets\_low} are instrumented, these instruments are both relevant and exogenous based on these tests. This is sensible in that planning leniency and retail area size partially explain the variation in other supermarket amenities as part of the first stage, where all instrumnts are used for each endogenous variable. 
+
+
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Wed, Mar 27, 2019 - 04:24:52
+% Date and time: Tue, Apr 02, 2019 - 02:19:44
 \begin{table}[!htbp] \centering 
   \caption{Instrumental Variables} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+  \label{table:iv} 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
- & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-3} 
-\\[-1.8ex] & \multicolumn{2}{c}{log\_price} \\ 
-\\[-1.8ex] & \textit{OLS} & \textit{IV} \\ 
-\\[-1.8ex] & (1) & (2)\\ 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{log\_price} \\ 
+\\[-1.8ex] & \textit{OLS} & \multicolumn{3}{c}{\textit{IV}} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
 \hline \\[-1.8ex] 
- dist\_miles\_log & $-$0.440$^{***}$ & $-$0.354$^{***}$ \\ 
-  & (0.015) & (0.048) \\ 
-  & & \\ 
- supermarkets\_high & 0.050$^{***}$ & 0.848$^{**}$ \\ 
-  (instrument: planning leniency) & (0.018) & (0.375) \\ 
-  & & \\ 
- supermarkets\_middle & $-$0.021$^{*}$ & $-$0.041 \\ 
-   & (0.012) & (0.033) \\ 
-  & & \\ 
- supermarkets\_low & $-$0.089$^{***}$ & $-$0.643$^{**}$ \\ 
-  (instrument: retail area size) & (0.022) & (0.323) \\ 
-  & & \\ 
- Constant & 14.140$^{***}$ & 13.920$^{***}$ \\ 
-  & (0.037) & (0.127) \\ 
-  & & \\ 
+ dist\_miles\_log & $-$0.440$^{***}$ & $-$0.348$^{***}$ & $-$0.434$^{***}$ & $-$0.354$^{***}$ \\ 
+  & (0.015) & (0.053) & (0.018) & (0.048) \\ 
+  & & & & \\ 
+ supermarkets\_high & 0.050$^{***}$ & \textbf{1.005$^{**}$} & 0.068$^{**}$ & \textbf{0.848$^{**}$} \\ 
+  & (0.018) & (0.464) & (0.032) & (0.375) \\ 
+  & & & & \\ 
+ supermarkets\_middle & $-$0.023$^{*}$ & $-$0.090$^{**}$ & $-$0.007 & $-$0.041 \\ 
+  & (0.012) & (0.041) & (0.025) & (0.033) \\ 
+  & & & & \\ 
+ supermarkets\_low & $-$0.088$^{***}$ & $-$0.200$^{***}$ & \textbf{$-$0.304} & \textbf{$-$0.643$^{**}$} \\ 
+  & (0.022) & (0.069) & (0.304) & (0.323) \\ 
+  & & & & \\
+ Constant & 14.143$^{***}$ & 13.852$^{***}$ & 14.149$^{***}$ & 14.050$^{***}$ \\ 
+  & (0.037) & (0.159) & (0.040) & (0.119) \\ 
+  & & & & \\ 
+ Instrument: planning leniency & - & YES &  & YES \\
+ Instrument: retail area size & - &  & YES & YES \\ 
+  & & & & \\
+ 
+
 \hline \\[-1.8ex] 
-Weak instruments (supermarkets\_high) &  & 0.0011*** \\ 
-Weak instruments (supermarkets\_low) &  & 0.0000*** \\ 
-Wu-Hausman &  & 0.0002*** \\ 
-Observations & 951 & 951 \\ 
-R$^{2}$ & 0.679 & $-$0.135 \\ 
-Adjusted R$^{2}$ & 0.671 & $-$0.165 \\ 
-Residual Std. Error (df = 926) & 0.258 & 0.486 \\ 
+Weak instruments (supermarkets\_high) & - & 0.0171 &  & 0.0011  \\ 
+Weak instruments (supermarkets\_low) & - &  & 0.0227 & 0.0134 \\ 
+Wu-Hausman & - & 0.0000 & 0.1546 & 0.0002\\ 
+Observations & 951 & 951 & 951 & 951 \\ 
+Adjusted R$^{2}$ & 0.671 &  &  &  \\ 
+Residual Std. Error (df = 926) & 0.258 & 0.511 & 0.272 & 0.590 \\ 
 \hline 
 \hline \\[-1.8ex] 
-\textit{Note: All other controls are included}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\textit{Note: All control variables included}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
 \end{table} 
+
 
 \subsubsection{First Difference Estimator}
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
@@ -611,9 +623,10 @@ converted stores?
 % Date and time: Sun, Mar 31, 2019 - 06:10:02
 
 \newpage
-\appendix
-\addtocontents{toc}{\setcounter{tocdepth}{-1}}
-\section{Complete OLS table}
+% \appendix
+% \addtocontents{toc}{\setcounter{tocdepth}{-1}}
+% \section{Complete OLS table}
+\textbf{Appendix: Complete OLS Table}
 \begin{table}[H] \centering 
   \caption{OLS: Neighbourhood Amenities} 
   \label{table:complete} 
@@ -684,6 +697,4 @@ Adjusted R$^{2}$ & 0.671 \\
 \textit{Note: SE in parenthesis}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
 \end{table} 
-
-
 \end{document}
